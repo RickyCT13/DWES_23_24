@@ -8,8 +8,7 @@
         - Tabla libros
 */
 
-function generarTabla()
-{
+function generarTabla() {
     $libros = [
         [
             'id' => 1,
@@ -56,8 +55,7 @@ function generarTabla()
 
 */
 
-function eliminar($tabla = [], $id_elemento)
-{
+function eliminar(&$tabla = [], $id_elemento) {
     foreach ($tabla as $id => $registro) {
         if ($registro['id'] == $id_elemento) {
             unset($tabla[$id]);
@@ -67,32 +65,53 @@ function eliminar($tabla = [], $id_elemento)
 }
 
 function ordenar($tabla = [], $campo) {
-    usort($tabla, function($a, $b) use ($campo) {
+    usort($tabla, function ($a, $b) use ($campo) {
         return $a[$campo] <=> $b[$campo];
     });
     return $tabla;
 }
 
-function actuaizar($tabla = [], $valores = [], $indice) {
-    
+function actualizar(&$tabla = [], $valores = [], $indice) {
+    foreach ($valores as $i => $valor) {
+        if ($valor !== null && isset($tabla[$indice][$i])) {
+            $tabla[$indice][$i] = $valor;
+        }
+    }
+    return $tabla;
+}
+
+function nuevo(&$tabla = [], $valores) {
+    $campos = array_keys($tabla[0]);
+    $nuevoRegistro = array_combine($campos, $valores);
+    array_push($tabla, $nuevoRegistro);
+    return $tabla;
+}
+
+function filtrar(&$tabla = [], $expresionBusqueda) {
+    $tablaFiltrada = array_filter($tabla, function($registro) use ($expresionBusqueda) {
+        return in_array($expresionBusqueda, $registro);
+    });
+    return $tablaFiltrada;
 }
 
 $libros = generarTabla();
 
-foreach ($libros as $libro) {
-    foreach ($libro as $campo) {
-        echo $campo . "\n";
-    }
-    echo "\n";
-}
+print_r($libros);
 
 eliminar($libros, 4);
 
-foreach ($libros as $libro) {
-    foreach ($libro as $campo) {
-        echo $campo . "\n";
-    }
-    echo "\n";
-}
+print_r($libros);
+
+$librosOrdenados = ordenar($libros, $libros[0]['autor']);
+
+print_r($librosOrdenados);
+
+actualizar($libros, [null, null, null, null, 13.99], 0);
+
+print_r($libros);
+
+$libros = nuevo($libros, [5, "1984", "George Orwell", "Distopia", 15.95]);
+
+print_r($libros);
 
 ?>
