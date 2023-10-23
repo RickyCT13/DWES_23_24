@@ -173,7 +173,7 @@ function filtrar(&$tabla = [], $expresionBusqueda) {
     return $tablaFiltrada;
 }
 
-$libros = generarTabla();
+// $libros = generarTabla();
 
 // Pruebas para el correcto funcionamiento:
 // 

@@ -32,7 +32,9 @@
                         <td><?= $campo ?></td>
                     <?php endforeach; ?>
                     <td>
-                    <a href="eliminar.php?indice=<?=$libro['id']?>"><i class="bi-trash-fill"></i></a>
+                    <a href="eliminar.php?id=<?=$libro['id']?>"><i class="bi-trash-fill"></i>
+                    <a href="."><i class="bi-pencil-fill"></i>
+                    </td>
                     </td>
                 </tr>
             <?php endforeach; ?>

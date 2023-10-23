@@ -1,11 +1,11 @@
 <?php
 
-$indice = $_GET['indice'];
+$id = $_GET['id'];
 
-$indiceElim = buscarEnTabla($libros, 'id', $indice);
+$idElim = buscarEnTabla($libros, 'id', $id);
 
-if ($indiceElim !== false) {
-    unset($libros[$indiceElim]);
+if ($idElim !== false) {
+    eliminar($libros, $id);
 }
 else {
     echo "Error: Libro no encontrado";
