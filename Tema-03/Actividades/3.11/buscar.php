@@ -2,7 +2,7 @@
 
 include 'libs/funciones.php';
 
-include 'models/model.ordenar.php';
+include 'models/model.buscar.php';
 
 include 'views/view.index.php';
 
