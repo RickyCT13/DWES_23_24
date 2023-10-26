@@ -9,26 +9,31 @@
     <!-- Capa Principal -->
     <div class="container">
         <header class="pb-3 mb-4 border-bottom">
-            <i class="bi bi-clipboard2-plus-fill"></i>
-            <span class="fs-3">Añadir Artículo</span>
+            <i class="bi bi-pencil-fill"></i>
+            <span class="fs-3">Editar Artículo</span>
         </header>
 
-        <legend>Formulario Añadir Artículo</legend>
-        <form action="create.php" method="POST">
-            <!-- Descripción -->
+        <legend>Formulario Editar Artículo</legend>
+        <form action="update.php?id=<?= $id ?>" method="POST">
+        <!-- id -->
+        <div class="mb-3">
+                <label for="id" class="form-label">id</label>
+                <input type="text" class="form-control" name="id" value="<?= $articulo['id'] ?>" disabled>
+            </div>    
+        <!-- Descripción -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion">
+                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>">
             </div>
             <!-- modelo -->
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo">
+                <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>">
             </div>
             <!-- Categoría -->
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría</label>
-                <select name="categoria" class="form-select">
+                <select name="categoria" class="form-select" value="<?= $articulo['categoria'] ?>">
                     <?php foreach($categorias as $categoria): ?>
                         <option><?=$categoria?></option>
                     <?php endforeach; ?>
@@ -37,16 +42,15 @@
             <!-- Unidades -->
             <div class="mb-3">
                 <label for="unidades" class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades">
+                <input type="number" class="form-control" name="unidades" value="<?= $articulo['unidades'] ?>">
             </div>
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio por unidad (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01">
+                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>">
             </div>
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-            <button class="btn btn-danger" type="reset">Borrar Datos</button>
-            <button class="btn btn-primary" type="submit">Añadir Artículo</button>
+            <button class="btn btn-primary" type="submit">Actualizar Artículo</button>
         </form>
 
     </div>

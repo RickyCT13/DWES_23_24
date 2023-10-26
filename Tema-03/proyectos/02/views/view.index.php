@@ -2,16 +2,13 @@
 <html lang="es">
 
 <head>
-  <?php include 'layouts/head.html'?>
+  <?php include 'layouts/head.php'?>
 </head>
 
 <body>
   <!-- Capa Principal -->
   <div class="container">
-    <header class="pb-3 mb-4 border-bottom">
-      <i class="bi bi-pc-display"></i>
-      <span class="fs-3">Proyecto 3.2: CRUD - Tabla Artículos</span>
-    </header>
+    <?php include 'partials/header.php'?>
 
     <?php include 'partials/menu.php'; ?>
 
@@ -58,10 +55,10 @@
   </div>
 
   <!-- Pie del documento -->
-  <?php include 'layouts/footer.html' ?>
+  <?php include 'partials/footer.php' ?>
 
   <!-- Bootstrap Javascript y popper -->
-  <?php include 'layouts/javascript.html' ?>
+  <?php include 'layouts/javascript.php' ?>
 </body>
 
 </html>

@@ -38,6 +38,22 @@ function generarTablaArticulos() {
             'unidades' => 75,
             'precio' => 187.95
         ],
+        [
+            'id' => 5,
+            'descripcion' => 'Monitor MSI Optix G24C4 23.6" LED FullHD 144Hz Freesync Curvo',
+            'modelo' => 'Optix G24C4',
+            'categoria' => 'Pantalla',
+            'unidades' => 152,
+            'precio' => 139.00
+        ],
+        [
+            'id' => 6,
+            'descripcion' => 'Impresora Hp Deskjet 2720e Multifunción Color Wifi',
+            'modelo' => 'Hp Deskjet 2720e',
+            'categoria' => 'Impresora',
+            'unidades' => 136,
+            'precio' => 64.90
+        ],
     ];
     return $articulos;
 }
@@ -55,6 +71,18 @@ function generarTablaCategorias() {
         "Impresora"
     ];
     return $categorias;
+}
+
+/**
+ * Busca un valor en una columna de la tabla.
+ * @param mixed $tabla La tabla con los registros.
+ * @param string $columna El nombre de la columna en la que se busca el valor.
+ * @param mixed $valor El valor que se desea encontrar.
+ * @return mixed El índice del registro o del primer resultado, o false si no se encuentra.
+ */
+function buscarEnTabla($tabla = [], $columna, $valor) {
+    $columna_valores = array_column((array) $tabla, $columna);
+    return array_search($valor, $columna_valores, false);
 }
 
 /**
@@ -80,6 +108,7 @@ function eliminar(&$tabla = [], $idElemento) {
 function actualizar(&$tabla = [], $idElemento, $valores = []) {
     $indice = array_search($idElemento, array_column($tabla, 'id'));
     $campos = array_keys($tabla[0]);
+    array_unshift($valores, $idElemento);
     $tabla[$indice] = array_combine($campos, $valores);
 }
 
@@ -90,6 +119,7 @@ function actualizar(&$tabla = [], $idElemento, $valores = []) {
  */
 function nuevo(&$tabla = [], $valores = []) {
     $campos = array_keys($tabla[0]);
+    array_unshift($valores, (ultimoId($tabla) + 1));
     array_push($tabla, array_combine($campos, $valores));
 }
 
@@ -112,6 +142,19 @@ function ordenar($tabla = [], $criterio) {
 }
 
 /**
+ * Devuelve los registros filtrados por una expresión de búsqueda.
+ * @param mixed $tabla
+ * @param mixed $expresionBusqueda
+ * @return mixed Los registros de la tabla que en cualquiera de sus campos contengan el valor que se busca.
+ */
+function filtrar($tabla = [], $expresionBusqueda) {
+    $tablaFiltrada = array_filter($tabla, function($registro) use ($expresionBusqueda) {
+        return in_array($expresionBusqueda, $registro);
+    });
+    return $tablaFiltrada;
+}
+
+/**
  * Obtiene el último id de la tabla.
  * @param mixed $tabla La tabla que contiene los registros.
  * @return int El id del último registro de la tabla.
@@ -120,7 +163,7 @@ function ultimoId($tabla = []) {
     return $tabla[count($tabla) - 1]['id'];
 }
 
-$articulos = generarTablaArticulos();
+/*$articulos = generarTablaArticulos();
 $categorias = generarTablaCategorias();
 
 print_r($articulos);
@@ -131,5 +174,5 @@ print_r($articulos);
 
 actualizar($articulos, 3, [3, "Artículo", "modelo", $categorias[0], 2, 2.99]);
 
-print_r($articulos);
+print_r($articulos);*/
 ?>
