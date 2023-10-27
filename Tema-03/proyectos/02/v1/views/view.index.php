@@ -17,9 +17,12 @@
       <!-- Encabezado tabla -->
       <thead>
         <tr>
-          <?php foreach(array_keys($articulos[0]) as $campo) : ?>
-            <th><?= ucfirst($campo)?></th>
-          <?php endforeach; ?>
+          <th>id</th>
+          <th>Descripción</th>
+          <th>Modelo</th>
+          <th>Categoría</th>
+          <th>Unidades</th>
+          <th>Precio</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -28,11 +31,13 @@
         <?php foreach ($articulos as $articulo): ?>
           <!-- Se aplicará el mismo formato a cada campo de la tabla -->
           <tr>
-            <?php foreach ($articulo as $campo): ?>
-              <td>
-                <?= $campo ?>
-              </td>
-            <?php endforeach; ?>
+            <!-- Campos por separado uds y precio alineados dcha, precio con moneda -->
+            <td><?=$articulo['id']?></td>
+            <td><?=$articulo['descripcion']?></td>
+            <td><?=$articulo['modelo']?></td>
+            <td><?=$categorias[$articulo['categoria']]?></td>
+            <td><?=$articulo['unidades']?></td>
+            <td><?= number_format($articulo['precio'], 2, ",", 2)?> €</td>
             <td>
               <a href="eliminar.php?id=<?= $articulo['id'] ?>"><i class="bi-trash-fill"></i></a>
               <a href="editar.php?id=<?= $articulo['id'] ?>"><i class="bi-pencil-fill"></i></a>

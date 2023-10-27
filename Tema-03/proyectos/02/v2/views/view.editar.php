@@ -33,10 +33,17 @@
             <!-- Categoría -->
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría</label>
-                <select name="categoria" class="form-select" value="<?= $articulo['categoria'] ?>">
-                    <?php foreach($categorias as $categoria): ?>
-                        <option><?=$categoria?></option>
+                <select name="categoria" class="form-select">
+                    <?php foreach($categorias as $indice => $categoria): ?>
+                        <option value="<?=$indice?>" <?=($articulo['categorias'] == $indice) ? 'selected' : null?>><?=$categoria?></option>
                     <?php endforeach; ?>
+
+                    <?php foreach($categorias as $indice => $categoria): ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="<?=$indice?>" name="categorias[]">
+                        <label class="form-check-label" for="categorias[]"><?=$categoria?></label>
+                    </div>
+                <?php endforeach; ?>
                 </select>
             </div>
             <!-- Unidades -->

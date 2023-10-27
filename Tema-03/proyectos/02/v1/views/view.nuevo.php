@@ -29,8 +29,9 @@
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría</label>
                 <select name="categoria" class="form-select">
-                    <?php foreach($categorias as $categoria): ?>
-                        <option><?=$categoria?></option>
+                    <option selected disabled>Seleccione Categoría</option>
+                    <?php foreach($categorias as $indice => $categoria): ?>
+                        <option value="<?=$indice?>"><?=$categoria?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
