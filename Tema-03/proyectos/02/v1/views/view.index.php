@@ -20,7 +20,7 @@
           <th>id</th>
           <th>Descripción</th>
           <th>Modelo</th>
-          <th>Categoría</th>
+          <th>Categorías</th>
           <th>Unidades</th>
           <th>Precio</th>
           <th>Acciones</th>

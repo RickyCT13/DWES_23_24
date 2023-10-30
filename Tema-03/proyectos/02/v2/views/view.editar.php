@@ -15,12 +15,12 @@
 
         <legend>Formulario Editar Artículo</legend>
         <form action="update.php?id=<?= $id ?>" method="POST">
-        <!-- id -->
-        <div class="mb-3">
+            <!-- id -->
+            <div class="mb-3">
                 <label for="id" class="form-label">id</label>
                 <input type="text" class="form-control" name="id" value="<?= $articulo['id'] ?>" disabled>
-            </div>    
-        <!-- Descripción -->
+            </div>
+            <!-- Descripción -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
                 <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>">
@@ -30,21 +30,24 @@
                 <label for="modelo" class="form-label">Modelo</label>
                 <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>">
             </div>
+            <!-- Marca -->
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <select name="marca" class="form-select">
+                    <?php foreach($marcas as $indice => $marca): ?>
+                        <option value="<?=$indice?>" <?=($articulo['marca'] == $indice) ? 'selected' : null?>><?=$marca?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
             <!-- Categoría -->
             <div class="mb-3">
-                <label for="categoria" class="form-label">Categoría</label>
-                <select name="categoria" class="form-select">
-                    <?php foreach($categorias as $indice => $categoria): ?>
-                        <option value="<?=$indice?>" <?=($articulo['categorias'] == $indice) ? 'selected' : null?>><?=$categoria?></option>
-                    <?php endforeach; ?>
-
-                    <?php foreach($categorias as $indice => $categoria): ?>
+                <label for="categoria" class="form-label">Categorías</label>
+                <?php foreach ($categorias as $indice => $categoria): ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="<?=$indice?>" name="categorias[]">
-                        <label class="form-check-label" for="categorias[]"><?=$categoria?></label>
+                        <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]">
+                        <label class="form-check-label" for="categorias[]"  <?= in_array($indice, $articulo['categorias']) ? 'checked' : null ?>><?= $categoria ?></label>
                     </div>
                 <?php endforeach; ?>
-                </select>
             </div>
             <!-- Unidades -->
             <div class="mb-3">
@@ -62,8 +65,8 @@
 
     </div>
 
-    <?php include 'partials/footer.php';?>
-    <?php include 'layouts/javascript.php';?>
+    <?php include 'partials/footer.php'; ?>
+    <?php include 'layouts/javascript.php'; ?>
 
 </body>
 

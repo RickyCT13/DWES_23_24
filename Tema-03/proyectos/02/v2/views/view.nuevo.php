@@ -25,15 +25,26 @@
                 <label for="modelo" class="form-label">Modelo</label>
                 <input type="text" class="form-control" name="modelo">
             </div>
+            <!-- marca -->
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <select name="marca" class="form-select">
+                    <option selected disabled>Seleccione Marca</option>
+                    <?php foreach($marcas as $indice => $marca): ?>
+                        <option value="<?=$indice?>"><?=$marca?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
             <!-- Categoría -->
             <div class="mb-3">
-                <label for="categoria" class="form-label">Categoría</label>
+                <label for="categorias" class="form-label">Categorías</label>
                 <?php foreach($categorias as $indice => $categoria): ?>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="<?=$indice?>" name="categorias[]">
-                        <label class="form-check-label" for="categorias[]"><?=$categoria?></label>
+                        <label class="form-check-label" for=""><?=$categoria?></label>
                     </div>
                 <?php endforeach; ?>
+                </label>
             </div>
             <!-- Unidades -->
             <div class="mb-3">

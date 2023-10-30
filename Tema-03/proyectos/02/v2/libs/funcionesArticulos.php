@@ -10,7 +10,7 @@ function generarTablaArticulos() {
             'id' => 1,
             'descripcion' => 'Portátil - HP 15-DB0074NS',
             'modelo' => 'HP 15-DB0074NS',
-            'categorias' => [0],
+            'categorias' => [0, 2, 3],
             'marca' => 4,
             'unidades' => 120,
             'precio' => 379.00
@@ -19,7 +19,7 @@ function generarTablaArticulos() {
             'id' => 2,
             'descripcion' => 'Portátil AMD A4-9125, 8 GB RAM, 125 GB',
             'modelo' => 'HP 255 G7, 15.6',
-            'categorias' => [0],
+            'categorias' => [0, 2, 3],
             'marca' => 1,
             'unidades' => 200,
             'precio' => 205.50
@@ -28,8 +28,8 @@ function generarTablaArticulos() {
             'id' => 3,
             'descripcion' => 'PC sobremesa - Lenovo Intel® Core™ i3-8100',
             'modelo' => 'ideacentre 5105-07ICB',
-            'categorias' => [1],
-            'marca' => 4,
+            'categorias' => [1, 2, 3],
+            'marca' => 10,
             'unidades' => 50,
             'precio' => 249.95
         ],
@@ -37,7 +37,7 @@ function generarTablaArticulos() {
             'id' => 4,
             'descripcion' => 'PC sobremesa - HP 290 APU AMD Dual-Core A6',
             'modelo' => 'HP 290-a0002ns',
-            'categorias' => [1],
+            'categorias' => [1, 2, 3],
             'marca' => 3,
             'unidades' => 75,
             'precio' => 187.95
@@ -47,7 +47,7 @@ function generarTablaArticulos() {
             'descripcion' => 'Monitor MSI Optix G24C4 23.6" LED FullHD 144Hz Freesync Curvo',
             'modelo' => 'Optix G24C4',
             'categorias' => [3],
-            'marca' => 5,
+            'marca' => 4,
             'unidades' => 152,
             'precio' => 139.00
         ],
@@ -70,11 +70,15 @@ function generarTablaArticulos() {
  */
 function generarTablaCategorias() {
     $categorias = [
-        "Portátil",
-        "PC sobremesa",
-        "Componente",
-        "Pantalla",
-        "Impresora"
+        'Portátiles',
+        'PCs sobremesa',
+        'Componentes',
+        'Pantallas',
+        'Impresoras',
+        'Tablets',
+        'Móviles',
+        'Fotografía',
+        'Imagen'
     ];
     asort($categorias);
     return $categorias;
@@ -90,11 +94,14 @@ function generarTablaMarcas() {
         'AMD',
         'Nvidia',
         'HP',
-        'Lenovo',
         'MSI',
-        'Apple',
         'Xiaomi',
-        'OPPO',
+        'Acer',
+        'Aoc',
+        'Nokia',
+        'Apple',
+        'Lenovo',
+        'IBM'
     ];
     asort($marcas);
     return $marcas;
@@ -107,8 +114,8 @@ function generarTablaMarcas() {
  * @param mixed $valor El valor que se desea encontrar.
  * @return mixed El índice del registro o del primer resultado, o false si no se encuentra.
  */
-function buscarEnTabla($tabla = [], $columna, $valor) {
-    $columna_valores = array_column((array) $tabla, $columna);
+function buscarEnTabla($tabla, $columna, $valor) {
+    $columna_valores = array_column($tabla, $columna);
     return array_search($valor, $columna_valores, false);
 }
 
@@ -118,7 +125,7 @@ function buscarEnTabla($tabla = [], $columna, $valor) {
  * @param int $idElemento El id del registro que se desea eliminar.
  * @return mixed El registro eliminado
  */
-function eliminar(&$tabla = [], $idElemento) {
+function eliminar(&$tabla, $idElemento) {
     $indice = array_search($idElemento, array_column($tabla, 'id'));
     $registroEliminado = $tabla[$indice];
     unset($tabla[$indice]);
@@ -132,7 +139,7 @@ function eliminar(&$tabla = [], $idElemento) {
  * @param mixed $idElemento El id del elemento a actualizar.
  * @param mixed $valores Los nuevos valores del registro.
  */
-function actualizar(&$tabla = [], $idElemento, $valores = []) {
+function actualizar(&$tabla, $idElemento, $valores) {
     $indice = array_search($idElemento, array_column($tabla, 'id'));
     $campos = array_keys($tabla[0]);
     array_unshift($valores, $idElemento);
@@ -144,7 +151,7 @@ function actualizar(&$tabla = [], $idElemento, $valores = []) {
  * @param mixed $tabla La tabla en la que se desea almacenar el registro.
  * @param mixed $valores Los valores del nuevo registro.
  */
-function nuevo(&$tabla = [], $valores = []) {
+function nuevo(&$tabla, $valores) {
     $campos = array_keys($tabla[0]);
     array_unshift($valores, (ultimoId($tabla) + 1));
     array_push($tabla, array_combine($campos, $valores));
@@ -156,7 +163,7 @@ function nuevo(&$tabla = [], $valores = []) {
  * @param string $criterio El criterio de ordenación.
  * @return mixed La tabla con los registros ordenados.
  */
-function ordenar($tabla = [], $criterio) {
+function ordenar($tabla, $criterio) {
     $campos = array_keys($tabla[0]);
     foreach($campos as $campo) {
         if ($criterio === $campo) {
@@ -174,7 +181,7 @@ function ordenar($tabla = [], $criterio) {
  * @param mixed $expresionBusqueda
  * @return mixed Los registros de la tabla que en cualquiera de sus campos contengan el valor que se busca.
  */
-function filtrar($tabla = [], $expresionBusqueda) {
+function filtrar($tabla, $expresionBusqueda) {
     $tablaFiltrada = array_filter($tabla, function($registro) use ($expresionBusqueda) {
         return in_array($expresionBusqueda, $registro);
     });
@@ -186,8 +193,19 @@ function filtrar($tabla = [], $expresionBusqueda) {
  * @param mixed $tabla La tabla que contiene los registros.
  * @return int El id del último registro de la tabla.
  */
-function ultimoId($tabla = []) {
-    return $tabla[count($tabla) - 1]['id'];
+function ultimoId($tabla) {
+    $arrayId = array_column($tabla, 'id');
+    asort($arrayId);
+    return end($arrayId);
+}
+
+function mostrarCategorias($categorias, $categoriasArticulo) {
+    $arrayCategorias = [];
+    foreach($categoriasArticulo as $indice) {
+        $arrayCategorias[] = $categorias[$indice];
+    }
+    asort($arrayCategorias);
+    return($arrayCategorias);
 }
 
 /*$articulos = generarTablaArticulos();
