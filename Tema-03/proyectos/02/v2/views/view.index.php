@@ -20,6 +20,7 @@
           <th>id</th>
           <th>Descripción</th>
           <th>Modelo</th>
+          <th>Marca</th>
           <th>Categorías</th>
           <th>Unidades</th>
           <th>Precio</th>
@@ -35,6 +36,7 @@
             <td><?=$articulo['id']?></td>
             <td><?=$articulo['descripcion']?></td>
             <td><?=$articulo['modelo']?></td>
+            <td><?=$marcas[$articulo['marca']]?></td>
             <td><?=implode(', ', mostrarCategorias($categorias, $articulo['categorias']))?></td>
             <td><?=$articulo['unidades']?></td>
             <td><?= number_format($articulo['precio'], 2, ",", 2)?> €</td>

@@ -4,6 +4,7 @@
 
 $articulos = generarTablaArticulos();
 $categorias = generarTablaCategorias();
+$marcas = generarTablaMarcas();
 
 $id = $_GET['id'];
 

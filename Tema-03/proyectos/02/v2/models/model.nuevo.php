@@ -4,5 +4,6 @@
 
 $articulos = generarTablaArticulos();
 $categorias = generarTablaCategorias();
+$marcas = generarTablaMarcas();
 
 ?>

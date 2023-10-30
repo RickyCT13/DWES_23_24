@@ -11,7 +11,7 @@ function generarTablaArticulos() {
             'descripcion' => 'Portátil - HP 15-DB0074NS',
             'modelo' => 'HP 15-DB0074NS',
             'categorias' => [0, 2, 3],
-            'marca' => 4,
+            'marca' => 3,
             'unidades' => 120,
             'precio' => 379.00
         ],
