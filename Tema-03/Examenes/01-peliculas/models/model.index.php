@@ -6,6 +6,9 @@
 
     */
 
-    
+$paises = getPaises();
+$generos = getGeneros();
+$peliculas = getPeliculas();
+
     
 ?>

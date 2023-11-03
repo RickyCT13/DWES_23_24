@@ -61,7 +61,7 @@ function getPeliculas()
             'titulo' => 'La vida es bella',
             'pais' => 89,
             'director' => 'Roberto Benini',
-            'generos' => [7, 3, 12],
+            'generos' => [7, 3, 11],
             'año' => 1997
         ]
         
