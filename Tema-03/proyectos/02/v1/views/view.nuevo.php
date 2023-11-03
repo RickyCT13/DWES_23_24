@@ -30,8 +30,10 @@
                 <label for="categoria" class="form-label">Categoría</label>
                 <select name="categoria" class="form-select">
                     <option selected disabled>Seleccione Categoría</option>
-                    <?php foreach($categorias as $indice => $categoria): ?>
-                        <option value="<?=$indice?>"><?=$categoria?></option>
+                    <?php foreach ($categorias as $indice => $categoria): ?>
+                        <option value="<?= $indice ?>">
+                            <?= $categoria ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -52,8 +54,8 @@
 
     </div>
 
-    <?php include 'partials/footer.php';?>
-    <?php include 'layouts/javascript.php';?>
+    <?php include 'partials/footer.php'; ?>
+    <?php include 'layouts/javascript.php'; ?>
 
 </body>
 
