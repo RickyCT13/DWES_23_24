@@ -34,8 +34,10 @@
             <div class="mb-3">
                 <label for="marca" class="form-label">Marca</label>
                 <select name="marca" class="form-select">
-                    <?php foreach($marcas as $indice => $marca): ?>
-                        <option value="<?=$indice?>" <?=($articulo['marca'] == $indice) ? 'selected' : null?>><?=$marca?></option>
+                    <?php foreach ($marcas as $indice => $marca): ?>
+                        <option value="<?= $indice ?>" <?= ($articulo['marca'] == $indice) ? 'selected' : null ?>>
+                            <?= $marca ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -44,8 +46,10 @@
                 <label for="categoria" class="form-label">Categorías</label>
                 <?php foreach ($categorias as $indice => $categoria): ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]">
-                        <label class="form-check-label" for="categorias[]"  <?= in_array($indice, $articulo['categorias']) ? 'checked' : null ?>><?= $categoria ?></label>
+                        <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]" <?= in_array($indice, $articulo['categorias']) ? 'checked' : null ?>>
+                        <label class="form-check-label" for="categorias[]">
+                            <?= $categoria ?>
+                        </label>
                     </div>
                 <?php endforeach; ?>
             </div>

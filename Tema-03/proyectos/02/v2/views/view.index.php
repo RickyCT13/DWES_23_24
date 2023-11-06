@@ -22,8 +22,8 @@
           <th>Modelo</th>
           <th>Marca</th>
           <th>Categorías</th>
-          <th>Unidades</th>
-          <th>Precio</th>
+          <th class="text-end">Unidades</th>
+          <th class="text-end">Precio</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -41,9 +41,9 @@
             <td><?=$articulo['unidades']?></td>
             <td><?= number_format($articulo['precio'], 2, ",", 2)?> €</td>
             <td>
-              <a href="eliminar.php?id=<?= $articulo['id'] ?>"><i class="bi-trash-fill"></i></a>
-              <a href="editar.php?id=<?= $articulo['id'] ?>"><i class="bi-pencil-fill"></i></a>
-              <a href="mostrar.php?id=<?= $articulo['id'] ?>"><i class="bi-eye-fill"></i></a>
+              <a href="eliminar.php?id=<?= $articulo['id'] ?>" title="Eliminar"><i class="bi-trash-fill"></i></a>
+              <a href="editar.php?id=<?= $articulo['id'] ?>" title="Editar"><i class="bi-pencil-fill"></i></a>
+              <a href="mostrar.php?id=<?= $articulo['id'] ?>" title="Mostrar"><i class="bi-eye-fill"></i></a>
             </td>
             </td>
           </tr>

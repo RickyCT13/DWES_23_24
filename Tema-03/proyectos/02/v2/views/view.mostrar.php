@@ -15,25 +15,34 @@
 
         <legend>Datos del artículo</legend>
         <form>
-        <!-- id -->
-        <div class="mb-3">
+            <!-- id -->
+            <div class="mb-3">
                 <label for="id" class="form-label">id</label>
                 <input type="text" class="form-control" name="id" value="<?= $articulo['id'] ?>" disabled>
-            </div>    
-        <!-- Descripción -->
+            </div>
+            <!-- Descripción -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>" disabled>
+                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>"
+                    disabled>
             </div>
             <!-- modelo -->
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
                 <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>" disabled>
             </div>
+            <!-- Marca -->
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" class="form-control" name="marca" value="<?= $marcas[$articulo['marca']] ?>"
+                    disabled>
+            </div>
+
             <!-- Categoría -->
             <div class="mb-3">
-                <label for="categoria" class="form-label">Categoría</label>
-                <input type="text" class="form-control" name="categoria" value="<?= $articulo['categoria'] ?>" disabled>
+                <label for="categorias" class="form-label">Categoría</label>
+                <input type="text" class="form-control" name="categorias"
+                    value="<?= implode(', ', mostrarCategorias($categorias, $articulo['categorias'])) ?>" disabled>
             </div>
             <!-- Unidades -->
             <div class="mb-3">
@@ -43,15 +52,16 @@
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio por unidad (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>" disabled>
+                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>"
+                    disabled>
             </div>
             <a class="btn btn-secondary" href="index.php" role="button">Volver</a>
         </form>
 
     </div>
 
-    <?php include 'partials/footer.php';?>
-    <?php include 'layouts/javascript.php';?>
+    <?php include 'partials/footer.php'; ?>
+    <?php include 'layouts/javascript.php'; ?>
 
 </body>
 
