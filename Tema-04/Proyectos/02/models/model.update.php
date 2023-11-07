@@ -6,23 +6,21 @@ $articulos = generarTablaArticulos();
 $categorias = generarTablaCategorias();
 $marcas = generarTablaMarcas();
 
-# Recibir por POST los datos
+$id = $_GET['id'];
 $descripcion = $_POST['descripcion'];
 $modelo = $_POST['modelo'];
-$marca = $_POST['marca'];
-$indiceCategorias = $_POST['categorias'];
+$categoria = $_POST['categoria'];
 $unidades = $_POST['unidades'];
 $precio = $_POST['precio'];
 
-$valoresNuevoArticulo = [
+$valoresActualizarArticulo = [
     $descripcion,
     $modelo,
-    $marca,
-    $indiceCategorias,
+    $categoria,
     $unidades,
     $precio
 ];
 
-nuevo($articulos, $valoresNuevoArticulo);
+actualizar($articulos, $id, $valoresActualizarArticulo);
 
 ?>

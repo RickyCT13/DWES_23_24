@@ -10,8 +10,8 @@ function generarTablaArticulos() {
             'id' => 1,
             'descripcion' => 'Portátil - HP 15-DB0074NS',
             'modelo' => 'HP 15-DB0074NS',
-            'categorias' => [0, 2, 3],
             'marca' => 3,
+            'categorias' => [0, 2, 3],
             'unidades' => 120,
             'precio' => 379.00
         ],
@@ -19,8 +19,8 @@ function generarTablaArticulos() {
             'id' => 2,
             'descripcion' => 'Portátil AMD A4-9125, 8 GB RAM, 125 GB',
             'modelo' => 'HP 255 G7, 15.6',
-            'categorias' => [0, 2, 3],
             'marca' => 1,
+            'categorias' => [0, 2, 3],
             'unidades' => 200,
             'precio' => 205.50
         ],
@@ -28,8 +28,8 @@ function generarTablaArticulos() {
             'id' => 3,
             'descripcion' => 'PC sobremesa - Lenovo Intel® Core™ i3-8100',
             'modelo' => 'ideacentre 5105-07ICB',
-            'categorias' => [1, 2, 3],
             'marca' => 10,
+            'categorias' => [1, 2, 3],
             'unidades' => 50,
             'precio' => 249.95
         ],
@@ -37,8 +37,8 @@ function generarTablaArticulos() {
             'id' => 4,
             'descripcion' => 'PC sobremesa - HP 290 APU AMD Dual-Core A6',
             'modelo' => 'HP 290-a0002ns',
-            'categorias' => [1, 2, 3],
             'marca' => 3,
+            'categorias' => [1, 2, 3],
             'unidades' => 75,
             'precio' => 187.95
         ],
@@ -46,8 +46,8 @@ function generarTablaArticulos() {
             'id' => 5,
             'descripcion' => 'Monitor MSI Optix G24C4 23.6" LED FullHD 144Hz Freesync Curvo',
             'modelo' => 'Optix G24C4',
-            'categorias' => [3],
             'marca' => 4,
+            'categorias' => [3],
             'unidades' => 152,
             'precio' => 139.00
         ],
@@ -55,8 +55,8 @@ function generarTablaArticulos() {
             'id' => 6,
             'descripcion' => 'Impresora Hp Deskjet 2720e Multifunción Color Wifi',
             'modelo' => 'Hp Deskjet 2720e',
-            'categorias' => [4],
             'marca' => 3,
+            'categorias' => [4],
             'unidades' => 136,
             'precio' => 64.90
         ]
@@ -199,13 +199,20 @@ function ultimoId($tabla) {
     return end($arrayId);
 }
 
-function mostrarCategorias($categorias, $categoriasArticulo) {
-    $arrayCategorias = [];
-    foreach($categoriasArticulo as $indice) {
-        $arrayCategorias[] = $categorias[$indice];
+function mostrarCategorias($categorias, $indiceCategorias) {
+    $aux = [];
+    foreach($indiceCategorias as $indice) {
+        $aux[] = $categorias[$indice];
     }
-    asort($arrayCategorias);
-    return($arrayCategorias);
+    asort($aux);
+    return($aux);
+}
+
+
+function mostrarMarcas($marcas, $indiceMarca) {
+    $marcas = (array) $marcas;
+    $indiceMarca = (int) $indiceMarca;
+    return $marcas[$indiceMarca];
 }
 
 /*$articulos = generarTablaArticulos();
