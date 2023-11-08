@@ -2,8 +2,9 @@
 
 # Generación de tablas
 
-$articulos = generarTablaArticulos();
-$categorias = generarTablaCategorias();
-$marcas = generarTablaMarcas();
+$articulos = new ArrayArticulos();
+$articulos->setTabla(ArrayArticulos::getDatos());
+$categorias = ArrayArticulos::getTablaCategorias();
+$marcas = ArrayArticulos::getTablaMarcas();
 
 ?>

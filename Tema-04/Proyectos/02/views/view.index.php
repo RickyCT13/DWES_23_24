@@ -33,17 +33,17 @@
           <!-- Se aplicará el mismo formato a cada campo de la tabla -->
           <tr>
             <!-- Campos por separado uds y precio alineados dcha, precio con moneda -->
-            <td><?=$articulo['id']?></td>
-            <td><?=$articulo['descripcion']?></td>
-            <td><?=$articulo['modelo']?></td>
-            <td><?=mostrarMarcas($marcas, $articulo['marca'])?></td>
-            <td><?=implode(', ', mostrarCategorias($categorias, $articulo['categorias']))?></td>
-            <td class="text-end"><?=$articulo['unidades']?></td>
-            <td style="padding: 0.5em 0.25em;" class="text-end"><?= number_format($articulo['precio'], 2, ",", 2)?> €</td>
+            <td><?=$articulo->getId()?></td>
+            <td><?=$articulo->getDescripcion()?></td>
+            <td><?=$articulo->getModelo()?></td>
+            <td><?=mostrarMarcas($marcas, $articulo->getMarca())?></td>
+            <td><?=implode(', ', mostrarCategorias($categorias, $articulo->getCategorias()))?></td>
+            <td class="text-end"><?=$articulo->getUnidades()?></td>
+            <td style="padding: 0.5em 0.25em;" class="text-end"><?= number_format($articulo->getPrecio(), 2, ",", 2)?> €</td>
             <td>
-              <a href="eliminar.php?id=<?= $articulo['id'] ?>" title="Eliminar"><i class="bi-trash-fill"></i></a>
-              <a href="editar.php?id=<?= $articulo['id'] ?>" title="Editar"><i class="bi-pencil-fill"></i></a>
-              <a href="mostrar.php?id=<?= $articulo['id'] ?>" title="Mostrar"><i class="bi-eye-fill"></i></a>
+              <a href="eliminar.php?id=<?= key($articulo) ?>" title="Eliminar"><i class="bi-trash-fill"></i></a>
+              <a href="editar.php?id=<?= key($articulo) ?>" title="Editar"><i class="bi-pencil-fill"></i></a>
+              <a href="mostrar.php?id=<?= key($articulo) ?>" title="Mostrar"><i class="bi-eye-fill"></i></a>
             </td>
             </td>
           </tr>
