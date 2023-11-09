@@ -2,27 +2,22 @@
 
 # Generar la tabla
 
-$articulos = generarTablaArticulos();
-$categorias = generarTablaCategorias();
-$marcas = generarTablaMarcas();
+$categorias = ArrayArticulos::getCategorias();
+$marcas = ArrayArticulos::getMarcas();
+$articulos = new ArrayArticulos();
+$articulos->getDatos();
 
 # Recibir por POST los datos
+$id = $articulos->generarId();
 $descripcion = $_POST['descripcion'];
 $modelo = $_POST['modelo'];
 $marca = $_POST['marca'];
-$indiceCategorias = $_POST['categorias'];
+$categoriasArticulo = $_POST['categorias'];
 $unidades = $_POST['unidades'];
 $precio = $_POST['precio'];
 
-$valoresNuevoArticulo = [
-    $descripcion,
-    $modelo,
-    $marca,
-    $indiceCategorias,
-    $unidades,
-    $precio
-];
+$nuevoArticulo = new Articulo($id, $descripcion, $modelo, $marca, $categoriasArticulo, $unidades, $precio);
 
-nuevo($articulos, $valoresNuevoArticulo);
+$articulos->crudCreate($nuevoArticulo);
 
 ?>

@@ -2,20 +2,14 @@
 
 # Generar la tabla
 
-$articulos = generarTablaArticulos();
-$categorias = generarTablaCategorias();
-$marcas = generarTablaMarcas();
+$categorias = ArrayArticulos::getCategorias();
+$marcas = ArrayArticulos::getMarcas();
+$articulos = new ArrayArticulos();
+$articulos->getDatos();
 
-$id = $_GET['id'];
 
-$indiceEditar = buscarEnTabla($articulos, 'id', $id);
+$indice = $_GET['indice'];
+$articulo = $articulos->crudRead($indice);
 
-if ($indiceEditar !== false) {
-    $articulo = $articulos[$indiceEditar];
-}
-else {
-    echo "Error: articulo no encontrado";
-    exit();
-}
 
 ?>

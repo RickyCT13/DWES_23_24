@@ -2,9 +2,10 @@
 
 # Generar la tabla
 
-$articulos = generarTablaArticulos();
-$categorias = generarTablaCategorias();
-$marcas = generarTablaMarcas();
+$categorias = ArrayArticulos::getCategorias();
+$marcas = ArrayArticulos::getMarcas();
+$articulos = new ArrayArticulos();
+$articulos->getDatos();
 
 $expresion = $_GET['expresion'];
 

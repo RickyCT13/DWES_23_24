@@ -2,12 +2,13 @@
 
 # Generar la tabla
 
-$articulos = generarTablaArticulos();
-$categorias = generarTablaCategorias();
-$marcas = generarTablaMarcas();
+$categorias = ArrayArticulos::getCategorias();
+$marcas = ArrayArticulos::getMarcas();
+$articulos = new ArrayArticulos();
+$articulos->getDatos();
 
-$id = $_GET['id'];
+$indice = $_GET['indice'];
 
-eliminar($articulos, $id);
+$articulos->crudDelete($indice);
 
 ?>

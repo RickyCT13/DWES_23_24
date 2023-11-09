@@ -2,9 +2,11 @@
 
 # Generación de tablas
 
+setlocale(LC_MONETARY, "es_ES");
+
+$categorias = ArrayArticulos::getCategorias();
+$marcas = ArrayArticulos::getMarcas();
 $articulos = new ArrayArticulos();
-$articulos->setTabla(ArrayArticulos::getDatos());
-$categorias = ArrayArticulos::getTablaCategorias();
-$marcas = ArrayArticulos::getTablaMarcas();
+$articulos->getDatos();
 
 ?>

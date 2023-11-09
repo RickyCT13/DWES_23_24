@@ -7,35 +7,35 @@
 
 <body>
     <!-- Capa Principal -->
-    <div class="container">
+    <div class="container"" style="padding: 1em 1em;">
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-pencil-fill"></i>
             <span class="fs-3">Editar Artículo</span>
         </header>
 
         <legend>Formulario Editar Artículo</legend>
-        <form action="update.php?id=<?= $id ?>" method="POST">
+        <form action="update.php?indice=<?= $indice ?>" method="POST">
             <!-- id -->
             <div class="mb-3">
                 <label for="id" class="form-label">id</label>
-                <input type="text" class="form-control" name="id" value="<?= $articulo['id'] ?>" disabled>
+                <input type="text" class="form-control" name="id" value="<?= $articulo->getId() ?>" disabled>
             </div>
             <!-- Descripción -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>">
+                <input type="text" class="form-control" name="descripcion" value="<?= $articulo->getDescripcion() ?>">
             </div>
             <!-- modelo -->
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>">
+                <input type="text" class="form-control" name="modelo" value="<?= $articulo->getModelo() ?>">
             </div>
             <!-- Marca -->
             <div class="mb-3">
                 <label for="marca" class="form-label">Marca</label>
                 <select name="marca" class="form-select">
                     <?php foreach ($marcas as $indice => $marca): ?>
-                        <option value="<?= $indice ?>" <?= ($articulo['marca'] == $indice) ? 'selected' : null ?>>
+                        <option value="<?= $indice ?>" <?= ($articulo->getMarca() == $indice) ? 'selected' : null ?>>
                             <?= $marca ?>
                         </option>
                     <?php endforeach; ?>
@@ -43,10 +43,10 @@
             </div>
             <!-- Categoría -->
             <div class="mb-3">
-                <label for="categoria" class="form-label">Categorías</label>
+                <label for="categorias" class="form-label">Categorías</label>
                 <?php foreach ($categorias as $indice => $categoria): ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]" <?= in_array($indice, $articulo['categorias']) ? 'checked' : null ?>>
+                        <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]" <?= in_array($indice, $articulo->getCategorias()) ? 'checked' : null ?>>
                         <label class="form-check-label" for="categorias[]">
                             <?= $categoria ?>
                         </label>
@@ -56,16 +56,20 @@
             <!-- Unidades -->
             <div class="mb-3">
                 <label for="unidades" class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades" value="<?= $articulo['unidades'] ?>">
+                <input type="number" class="form-control" name="unidades" value="<?= $articulo->getUnidades() ?>">
             </div>
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio por unidad (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>">
+                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo->getPrecio() ?>">
             </div>
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
             <button class="btn btn-primary" type="submit">Actualizar Artículo</button>
         </form>
+        
+        <br>
+        <br>
+        <br>
 
     </div>
 

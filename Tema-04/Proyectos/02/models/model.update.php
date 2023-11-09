@@ -2,25 +2,22 @@
 
 # Generar la tabla
 
-$articulos = generarTablaArticulos();
-$categorias = generarTablaCategorias();
-$marcas = generarTablaMarcas();
+$categorias = ArrayArticulos::getCategorias();
+$marcas = ArrayArticulos::getMarcas();
 
-$id = $_GET['id'];
-$descripcion = $_POST['descripcion'];
-$modelo = $_POST['modelo'];
-$categoria = $_POST['categoria'];
-$unidades = $_POST['unidades'];
-$precio = $_POST['precio'];
+$articulos = new ArrayArticulos();
+$articulos->getDatos();
 
-$valoresActualizarArticulo = [
-    $descripcion,
-    $modelo,
-    $categoria,
-    $unidades,
-    $precio
-];
+$indice = $_GET['indice'];
+$articuloEdit = $articulos->crudRead($indice);
 
-actualizar($articulos, $id, $valoresActualizarArticulo);
+$articuloEdit->setDescripcion($_POST['descripcion']);
+$articuloEdit->setModelo($_POST['modelo']);
+$articuloEdit->setMarca($_POST['marca']);
+$articuloEdit->setCategorias($_POST['categorias']);
+$articuloEdit->setUnidades($_POST['unidades']);
+$articuloEdit->setPrecio($_POST['precio']);
+
+$articulos->crudUpdate($indice, $articuloEdit);
 
 ?>
