@@ -69,18 +69,17 @@ class ArrayArticulos {
         return (end($this->tabla)->getId()) + 1;
     }
 
-    
 
-    public function propiedadesObjeto($indice) {
-        $articulo = $this->tabla[$indice];
+
+    public function propiedadesObjeto($articulo) {
         $propiedadesArticulo = [
-            'id' => $articulo->getId(),
-            'modelo' => $articulo->getModelo(),
-            'descripcion' => $articulo->getDescripcion(),
-            'marca' => $articulo->getMarca(),
-            'categorias' => $articulo->getCategorias(),
-            'unidades' => $articulo->getUnidades(),
-            'precio' => $articulo->getPrecio()
+            $articulo->getId(),
+            $articulo->getModelo(),
+            $articulo->getDescripcion(),
+            $articulo->getMarca(),
+            $articulo->getCategorias(),
+            $articulo->getUnidades(),
+            $articulo->getPrecio()
         ];
         return $propiedadesArticulo;
     }
@@ -88,7 +87,7 @@ class ArrayArticulos {
     public function getDatos() {
         $tabla = [];
 
-        $articulo = new Articulo (
+        $articulo = new Articulo(
             1,
             'Portátil - HP 15-DB0074NS',
             'HP 15-DB0074NS',
@@ -100,7 +99,7 @@ class ArrayArticulos {
 
         $this->tabla[] = $articulo;
 
-        $articulo = new Articulo (
+        $articulo = new Articulo(
             2,
             'Portátil AMD A4-9125, 8 GB RAM, 125 GB',
             'HP 255 G7, 15.6',
@@ -112,10 +111,10 @@ class ArrayArticulos {
 
         $this->tabla[] = $articulo;
 
-        $articulo = new Articulo (
+        $articulo = new Articulo(
             3,
             'PC sobremesa - Lenovo Intel® Core™ i3-8100',
-            'ideacentre 5105-07ICB',
+            'Ideacentre 5105-07ICB',
             10,
             [1, 2, 3],
             50,
@@ -124,7 +123,7 @@ class ArrayArticulos {
 
         $this->tabla[] = $articulo;
 
-        $articulo = new Articulo (
+        $articulo = new Articulo(
             4,
             'PC sobremesa - HP 290 APU AMD Dual-Core A6',
             'HP 290-a0002ns',
@@ -136,7 +135,7 @@ class ArrayArticulos {
 
         $this->tabla[] = $articulo;
 
-        $articulo = new Articulo (
+        $articulo = new Articulo(
             5,
             'Monitor MSI Optix G24C4 23.6" LED FullHD 144Hz Freesync Curvo',
             'Optix G24C4',
@@ -148,7 +147,7 @@ class ArrayArticulos {
 
         $this->tabla[] = $articulo;
 
-        $articulo = new Articulo (
+        $articulo = new Articulo(
             6,
             'Impresora Hp Deskjet 2720e Multifunción Color Wifi',
             'Hp Deskjet 2720e',
@@ -159,23 +158,45 @@ class ArrayArticulos {
         );
 
         $this->tabla[] = $articulo;
-        
+
         return $tabla;
     }
 
-    
-
     public static function mostrarCategorias($categorias, $indiceCategorias) {
         $aux = [];
-        foreach($indiceCategorias as $indice) {
+        foreach ($indiceCategorias as $indice) {
             $aux[] = $categorias[$indice];
         }
         asort($aux);
-        return($aux);
+        return ($aux);
     }
-    
-    
+
     function mostrarMarcas($marcas, $indiceMarca) {
         return $marcas[$indiceMarca];
     }
+
+    function ordenar($criterio) {
+        $criterio = "get".ucFirst($criterio);
+        usort($this->tabla, function($a, $b) use($criterio) {
+            return $a->$criterio() <=> $b->$criterio();
+        });
+    }
+
+    /*public function filtrar($expresionBusqueda) {
+        $this->tabla = array_map(propiedadesObjeto(), $this->tabla);
+
+        $tablaFiltrada = array_filter($this->tabla, function($registro) use ($expresionBusqueda) {
+            foreach($registro as $campo) {
+                if (strpos($campo, $expresionBusqueda) !== false) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        $tablaFiltrada = array_map(function($registro) {
+            return (object)$registro;
+        }, $tablaFiltrada);
+        return $tablaFiltrada;
+    }*/
 }

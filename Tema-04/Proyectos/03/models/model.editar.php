@@ -7,8 +7,9 @@ $marcas = ArrayArticulos::getMarcas();
 $articulos = new ArrayArticulos();
 $articulos->getDatos();
 
-$expresion = $_GET['expresion'];
 
+$indice = $_GET['indice'];
+$articulo = $articulos->crudRead($indice);
 
 
 ?>

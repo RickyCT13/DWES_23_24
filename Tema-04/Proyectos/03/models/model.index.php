@@ -1,14 +1,12 @@
-<?php 
+<?php
 
-# Generar la tabla
+# Generación de tablas
+
+setlocale(LC_MONETARY, "es_ES");
 
 $categorias = ArrayArticulos::getCategorias();
 $marcas = ArrayArticulos::getMarcas();
 $articulos = new ArrayArticulos();
 $articulos->getDatos();
-
-$expresion = $_GET['expresion'];
-
-
 
 ?>
