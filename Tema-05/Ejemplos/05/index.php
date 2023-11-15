@@ -39,6 +39,7 @@ echo 'Número de columnas: ' . $result->field_count;
 echo '<br>';
 
 // Devuelve un array doble, con los indices escalar y asociativo.
+// NOTA: Se crean dos arrays, uno indexado y otro asociativo
 
 $alumnos = $result->fetch_all(MYSQLI_BOTH);
 
