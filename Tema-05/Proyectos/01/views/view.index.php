@@ -12,38 +12,38 @@
 
     <?php include 'partials/menu.php'; ?>
 
-    <legend>Tabla Artículos</legend>
+    <legend>Tabla Alumnos</legend>
     <table class="table">
       <!-- Encabezado tabla -->
       <thead>
         <tr>
           <th>id</th>
-          <th>Descripción</th>
-          <th>Modelo</th>
-          <th>Marca</th>
-          <th>Categorías</th>
-          <th class="text-end">Unidades</th>
-          <th class="text-end">Precio</th>
-          <th>Acciones</th>
+          <th>Nombre completo</th>
+          <th>DNI</th>
+          <th>Teléfono</th>
+          <th>Población</th>
+          <th class="text-end">Edad</th>
+          <th class="text-end">Curso</th>
+          <th class="text-center">Acciones</th>
         </tr>
       </thead>
       <!-- Cuerpo tabla -->
       <tbody>
-        <?php foreach ((array) $articulos->getTabla() as $indice => $articulo): ?>
+        <?php foreach ($tablaAlumnos as $alumno): ?>
           <!-- Se aplicará el mismo formato a cada campo de la tabla -->
           <tr>
             <!-- Campos por separado uds y precio alineados dcha, precio con moneda -->
-            <td><?=$articulo->getId()?></td>
-            <td><?=$articulo->getDescripcion()?></td>
-            <td><?=$articulo->getModelo()?></td>
-            <td><?=$marcas[$articulo->getMarca()]?></td>
-            <td><?=implode(', ', ArrayArticulos::mostrarCategorias($categorias, $articulo->getCategorias()))?></td>
-            <td class="text-end"><?=$articulo->getUnidades()?></td>
-            <td style="padding: 0.5em 0.25em;" class="text-end text-nowrap"><?= number_format($articulo->getPrecio(), 2, ",", 2)?> €</td>
-            <td>
-              <a href="eliminar.php?indice=<?= $indice ?>" title="Eliminar"><i class="bi-trash-fill"></i></a>
-              <a href="editar.php?indice=<?= $indice ?>" title="Editar"><i class="bi-pencil-fill"></i></a>
-              <a href="mostrar.php?indice=<?= $indice ?>" title="Mostrar"><i class="bi-eye-fill"></i></a>
+            <td><?=$alumno['id']?></td>
+            <td><?=$alumno['nombreCompleto']?></td>
+            <td><?=$alumno['dni']?></td>
+            <td><?=$alumno['telefono']?></td>
+            <td><?=$alumno['poblacion']?></td>
+            <td class="text-end"><?=$alumno['edad']?></td>
+            <td class="text-end"><?=$alumno['curso']?></td>
+            <td class="text-center">
+              <a href="eliminar.php?id=<?=$alumno['id']?>" title="Eliminar"><i class="bi-trash-fill"></i></a>
+              <a href="editar.php?id=<?=$alumno['id']?>" title="Editar"><i class="bi-pencil-fill"></i></a>
+              <a href="mostrar.php?id=<?=$alumno['id']?>" title="Mostrar"><i class="bi-eye-fill"></i></a>
             </td>
             </td>
           </tr>
@@ -53,8 +53,8 @@
       <tfoot>
         <!-- La celda ocupará tantas columnas (colspan)
             como campos de cada registro haya (count($articulo)) -->
-        <td colspan="8">Nº articulos:
-          <?= count((array) $articulos->getTabla()) ?>
+        <td colspan="<?= count($tablaAlumnos[0]) + 1?>">Nº alumnos:
+          <?= count($tablaAlumnos) ?>
         </td>
       </tfoot>
     </table>

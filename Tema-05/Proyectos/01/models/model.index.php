@@ -14,6 +14,8 @@ $db = new Fp();
 // Cargar alumnos
 $alumnos = $db->getAlumnos();
 
+$tablaAlumnos = $alumnos->fetch_all(MYSQLI_ASSOC);
+
 
 
 ?>
