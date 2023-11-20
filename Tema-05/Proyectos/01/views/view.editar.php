@@ -7,64 +7,89 @@
 
 <body>
     <!-- Capa Principal -->
-    <div class="container"" style="padding: 1em 1em;">
+    <div class="container" style="padding: 1em 1em;">
         <header class="pb-3 mb-4 border-bottom">
-            <i class="bi bi-pencil-fill"></i>
-            <span class="fs-3">Editar Artículo</span>
+            <i class="bi bi-clipboard2-plus-fill"></i>
+            <span class="fs-3">Añadir Artículo</span>
         </header>
 
-        <legend>Formulario Editar Artículo</legend>
-        <form action="update.php?indice=<?= $indice ?>" method="POST">
-            <!-- id -->
+        <legend>Formulario Añadir Alumno</legend>
+        <form action="update.php?id=<?=$alumnoEdit['id']?>" method="POST">
+            <!-- Nombre -->
             <div class="mb-3">
-                <label for="id" class="form-label">id</label>
-                <input type="text" class="form-control" name="id" value="<?= $articulo->getId() ?>" disabled>
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" value="<?=$alumnoEdit['nombre']?>">
             </div>
-            <!-- Descripción -->
+
+            <!-- Apellidos -->
             <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion" value="<?= $articulo->getDescripcion() ?>">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos" value="<?=$alumnoEdit['apellidos']?>">
             </div>
-            <!-- modelo -->
+
+            <!-- Email -->
             <div class="mb-3">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $articulo->getModelo() ?>">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" name="email" value="<?=$alumnoEdit['email']?>">
             </div>
-            <!-- Marca -->
+
+            <!-- Teléfono -->
             <div class="mb-3">
-                <label for="marca" class="form-label">Marca</label>
-                <select name="marca" class="form-select">
-                    <?php foreach ($marcas as $indice => $marca): ?>
-                        <option value="<?= $indice ?>" <?= ($articulo->getMarca() == $indice) ? 'selected' : null ?>>
-                            <?= $marca ?>
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" name="telefono" value="<?=$alumnoEdit['telefono']?>">
+            </div>
+
+            <!-- Dirección -->
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" name="direccion" value="<?=$alumnoEdit['direccion']?>">
+            </div>
+
+            <!-- Población -->
+            <div class="mb-3">
+                <label for="poblacion" class="form-label">Población</label>
+                <input type="text" class="form-control" name="poblacion" value="<?=$alumnoEdit['poblacion']?>">
+            </div>
+
+            <!-- Provincia -->
+            <div class="mb-3">
+                <label for="provincia" class="form-label">Provincia</label>
+                <input type="text" class="form-control" name="provincia" value="<?=$alumnoEdit['provincia']?>">
+            </div>
+
+            <!-- Nacionalidad -->
+            <div class="mb-3">
+                <label for="nacionalidad" class="form-label">Nacionalidad</label>
+                <input type="text" class="form-control" name="nacionalidad" value="<?=$alumnoEdit['nacionalidad']?>">
+            </div>
+
+            <!-- DNI -->
+            <div class="mb-3">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control" name="dni" value="<?=$alumnoEdit['dni']?>">
+            </div>
+
+            <!-- Fecha de nacimiento -->
+            <div class="mb-3">
+                <label for="fechaNac" class="form-label">Fecha de nacimiento</label>
+                <input type="date" class="form-control" name="fechaNac" value="<?=$alumnoEdit['fechaNac']?>">
+            </div>
+
+            <!-- Curso -->
+            <div class="mb-3">
+                <label for="curso" class="form-label">Curso</label>
+                <select name="curso" class="form-select">
+                    <?php foreach ($cursos as $curso): ?>
+                        <option value="<?= $curso['id'] ?>" <?= ($alumnoEdit['id_curso'] == $curso['id']) ? 'selected' : null ?>>
+                            <?= $curso['nombre'] ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <!-- Categoría -->
-            <div class="mb-3">
-                <label for="categorias" class="form-label">Categorías</label>
-                <?php foreach ($categorias as $indice => $categoria): ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]" <?= in_array($indice, $articulo->getCategorias()) ? 'checked' : null ?>>
-                        <label class="form-check-label" for="categorias[]">
-                            <?= $categoria ?>
-                        </label>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            <!-- Unidades -->
-            <div class="mb-3">
-                <label for="unidades" class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades" value="<?= $articulo->getUnidades() ?>">
-            </div>
-            <!-- Precio -->
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio por unidad (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo->getPrecio() ?>">
-            </div>
+
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-            <button class="btn btn-primary" type="submit">Actualizar Artículo</button>
+            <button class="btn btn-danger" type="reset">Borrar Datos</button>
+            <button class="btn btn-primary" type="submit">Actualizar</button>
         </form>
         
         <br>

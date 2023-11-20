@@ -2,22 +2,63 @@
 
 # Generar la tabla
 
-$categorias = ArrayArticulos::getCategorias();
-$marcas = ArrayArticulos::getMarcas();
+setlocale(LC_MONETARY, "es_ES");
 
-$articulos = new ArrayArticulos();
-$articulos->getDatos();
+// Conexión con la base de datos
+$db = new Fp();
 
-$indice = $_GET['indice'];
-$articuloEdit = $articulos->crudRead($indice);
+// Cargar alumnos
+$alumnos = $db->getAlumnos();
 
-$articuloEdit->setDescripcion($_POST['descripcion']);
-$articuloEdit->setModelo($_POST['modelo']);
-$articuloEdit->setMarca($_POST['marca']);
-$articuloEdit->setCategorias($_POST['categorias']);
-$articuloEdit->setUnidades($_POST['unidades']);
-$articuloEdit->setPrecio($_POST['precio']);
+$tablaAlumnos = $alumnos->fetch_all(MYSQLI_ASSOC);
 
-$articulos->crudUpdate($indice, $articuloEdit);
+$stmt = $db->db->prepare("UPDATE alumnos SET
+nombre = ?,
+apellidos = ?,
+email = ?,
+telefono = ?,
+direccion = ?,
+poblacion = ?,
+provincia = ?,
+nacionalidad = ?,
+dni = ?,
+fechaNac = ?,
+id_curso = ?
+WHERE id = ?
+");
+$stmt->bind_param(
+    "ssssssssssii",
+    $nombre,
+    $apellidos,
+    $email,
+    $telefono,
+    $direccion,
+    $poblacion,
+    $provincia,
+    $nacionalidad,
+    $dni,
+    $fechaNac,
+    $idCurso,
+    $idEdit
+);
+
+
+$idEdit = $_GET['id'];
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$email = $_POST['email'];
+$telefono = $_POST['telefono'];
+$direccion = $_POST['direccion'];
+$poblacion = $_POST['poblacion'];
+$provincia = $_POST['provincia'];
+$nacionalidad = $_POST['nacionalidad'];
+$dni = $_POST['dni'];
+$fechaNac = $_POST['fechaNac'];
+$idCurso = $_POST['curso'];
+
+$stmt->execute();
+
+
+
 
 ?>
