@@ -2,22 +2,42 @@
 
 # Generar la tabla
 
-$categorias = ArrayArticulos::getCategorias();
-$marcas = ArrayArticulos::getMarcas();
-$articulos = new ArrayArticulos();
-$articulos->getDatos();
+setlocale(LC_MONETARY, "es_ES");
 
-# Recibir por POST los datos
-$id = $articulos->generarId();
-$descripcion = $_POST['descripcion'];
-$modelo = $_POST['modelo'];
-$marca = $_POST['marca'];
-$categoriasArticulo = $_POST['categorias'];
-$unidades = $_POST['unidades'];
-$precio = $_POST['precio'];
+// Conexión con la base de datos
+$db = new Fp();
 
-$nuevoArticulo = new Articulo($id, $descripcion, $modelo, $marca, $categoriasArticulo, $unidades, $precio);
+// Cargar alumnos
+$alumnos = $db->getAlumnos();
 
-$articulos->crudCreate($nuevoArticulo);
+$stmt = $db->db->prepare("INSERT INTO alumnos VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param(
+    "ssssssssssi",
+    $nombre,
+    $apellidos,
+    $email,
+    $telefono,
+    $direccion,
+    $poblacion,
+    $provincia,
+    $nacionalidad,
+    $dni,
+    $fechaNac,
+    $idCurso
+);
+
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$email = $_POST['email'];
+$telefono = $_POST['telefono'];
+$direccion = $_POST['direccion'];
+$poblacion = $_POST['poblacion'];
+$provincia = $_POST['provincia'];
+$nacionalidad = $_POST['nacionalidad'];
+$dni = $_POST['dni'];
+$fechaNac = $_POST['fechaNac'];
+$idCurso = $_POST['curso'];
+
+$stmt->execute();
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
-include 'class/class.articulo.php';
-include 'class/class.arrayArticulos.php';
+include 'class/class.conexion.php';
+include 'class/class.fp.php';
 
 include 'models/model.nuevo.php';
 
