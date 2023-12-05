@@ -279,4 +279,36 @@ class Fp extends Conexion {
             exit();
         }
     }
+
+    public function filter($expresion) {
+        try {
+            $stmt = "SELECT 
+                al.id,
+                concat_ws(\" \", al.nombre, al.apellidos) AS nombreCompleto,
+                al.email,
+                al.telefono,
+                al.poblacion,
+                al.dni,
+                timestampdiff(YEAR, al.fechaNac, NOW()) AS edad,
+                cu.nombreCorto as curso
+            FROM alumnos AS al INNER JOIN cursos AS cu ON al.id_curso = cu.id WHERE CONCAT_WS(' ', al.id, concat_ws(\" \", al.nombre, al.apellidos), al.email, al.telefono, al.poblacion, al.dni, timestampdiff(YEAR, al.fechaNac, NOW()), cu.nombreCorto) LIKE :expresion";
+
+            $pdostmt = $this->pdo->prepare($stmt);
+
+            $expresionLike = "%".$expresion."%";
+
+            $pdostmt->bindParam(':expresion', $expresionLike);
+
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            $pdostmt->execute();
+
+            return $pdostmt;
+
+        }
+        catch (PDOException $ex) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
 }
