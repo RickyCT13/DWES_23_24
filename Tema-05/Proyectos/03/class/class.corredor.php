@@ -11,9 +11,11 @@ class Corredor {
     $ciudad,
     $fechaNacimiento,
     $sexo,
+    $email,
+    $dni,
     $edad,
-    $categoria_id,
-    $club_id;
+    $id_categoria,
+    $id_club;
 }
 
 ?>

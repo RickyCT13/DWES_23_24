@@ -10,10 +10,10 @@
     <div class="container" style="padding: 1em 1em;">
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-clipboard2-plus-fill"></i>
-            <span class="fs-3">Añadir Artículo</span>
+            <span class="fs-3">Añadir Corredor</span>
         </header>
 
-        <legend>Formulario Añadir Alumno</legend>
+        <legend>Formulario Añadir Corredor</legend>
         <form action="create.php" method="POST">
             <!-- Nombre -->
             <div class="mb-3">
@@ -27,46 +27,10 @@
                 <input type="text" class="form-control" name="apellidos">
             </div>
 
-            <!-- Email -->
+            <!-- Ciudad -->
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" name="email">
-            </div>
-
-            <!-- Teléfono -->
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" name="telefono">
-            </div>
-
-            <!-- Dirección -->
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" name="direccion">
-            </div>
-
-            <!-- Población -->
-            <div class="mb-3">
-                <label for="poblacion" class="form-label">Población</label>
-                <input type="text" class="form-control" name="poblacion">
-            </div>
-
-            <!-- Provincia -->
-            <div class="mb-3">
-                <label for="provincia" class="form-label">Provincia</label>
-                <input type="text" class="form-control" name="provincia">
-            </div>
-
-            <!-- Nacionalidad -->
-            <div class="mb-3">
-                <label for="nacionalidad" class="form-label">Nacionalidad</label>
-                <input type="text" class="form-control" name="nacionalidad">
-            </div>
-
-            <!-- DNI -->
-            <div class="mb-3">
-                <label for="dni" class="form-label">DNI</label>
-                <input type="text" class="form-control" name="dni">
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <input type="text" class="form-control" name="ciudad">
             </div>
 
             <!-- Fecha de nacimiento -->
@@ -75,14 +39,58 @@
                 <input type="date" class="form-control" name="fechaNac">
             </div>
 
-            <!-- Curso -->
+            <!-- Sexo -->
             <div class="mb-3">
-                <label for="curso" class="form-label">Curso</label>
-                <select name="curso" class="form-select">
-                    <option selected disabled>Seleccione Curso</option>
-                    <?php foreach ($cursos as $curso): ?>
-                        <option value="<?= $curso->id ?>">
-                            <?= $curso->curso ?>
+                <label for="email" class="form-label">Sexo</label>
+                <div class="form-control">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sexo" value="H">
+                        <label class="form-check-label" for="sexo">Hombre</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sexo" value="M">
+                        <label class="form-check-label" for="sexo">Mujer</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sexo" value=" ">
+                        <label class="form-check-label" for="sexo">Sin especificar</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+
+            <!-- DNI -->
+            <div class="mb-3">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control" name="dni">
+            </div>
+
+            <!-- Categoria -->
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select name="categoria" class="form-select">
+                    <option selected disabled>Seleccione Categoría</option>
+                    <?php foreach ($categorias as $categoria) : ?>
+                        <option value="<?= $categoria->id ?>">
+                            <?= $categoria->categoria ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- Club -->
+            <div class="mb-3">
+                <label for="club" class="form-label">Club</label>
+                <select name="club" class="form-select">
+                    <option selected disabled>Seleccione Club</option>
+                    <?php foreach ($clubs as $club) : ?>
+                        <option value="<?= $club->id ?>">
+                            <?= $club->club ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -92,7 +100,7 @@
             <button class="btn btn-danger" type="reset">Borrar Datos</button>
             <button class="btn btn-primary" type="submit">Añadir Artículo</button>
         </form>
-        
+
         <br>
         <br>
         <br>
