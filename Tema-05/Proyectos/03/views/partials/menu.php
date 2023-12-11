@@ -21,11 +21,11 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="index.php">Id</a></li>
                         <li><a class="dropdown-item" href="ordenar.php?criterio=nombreCompleto">Nombre</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=ciudad">Ciudad</a></li>
                         <li><a class="dropdown-item" href="ordenar.php?criterio=email">Email</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=telefono">Teléfono</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=poblacion">Población</a></li>
                         <li><a class="dropdown-item" href="ordenar.php?criterio=edad">Edad</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=curso">Curso</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=categoria">Categoría</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=club">Club</a></li>
                     </ul>
                 </li>
             </ul>

@@ -15,13 +15,14 @@ class Maratoon extends Conexion {
     /* crudCreate, crudRead, crudUpdate, crudDelete */
     public function crudCreate($corredor) {
         try {
-            $query = "INSERT INTO corredores VALUES (
-                null,
+            $query = "INSERT INTO corredores (nombre, apellidos, ciudad, fechaNacimiento, sexo, email, dni, edad, id_categoria, id_club) VALUES (
                 :nombre,
                 :apellidos,
                 :ciudad,
                 :fechaNacimiento,
                 :sexo,
+                :email,
+                :dni,
                 :edad,
                 :id_categoria,
                 :id_club
@@ -35,7 +36,8 @@ class Maratoon extends Conexion {
             $pdostmt->bindParam(':fechaNacimiento', $corredor->fechaNacimiento);
             $pdostmt->bindParam(':sexo', $corredor->sexo);
             $pdostmt->bindParam(':email', $corredor->email, PDO::PARAM_STR, 45);
-            $pdostmt->bindParam(':edad', $corredor->edad);
+            $pdostmt->bindParam(':dni', $corredor->dni, PDO::PARAM_STR, 9);
+            $pdostmt->bindParam(':edad', $corredor->edad, PDO::PARAM_INT, 2);
             $pdostmt->bindParam(':id_categoria', $corredor->id_categoria, PDO::PARAM_INT, 10);
             $pdostmt->bindParam(':id_club', $corredor->id_club, PDO::PARAM_INT, 10);
 
@@ -79,6 +81,8 @@ class Maratoon extends Conexion {
                 ciudad = :ciudad,
                 fechaNacimiento = :fechaNacimiento,
                 sexo = :sexo,
+                email = :email,
+                dni = :dni,
                 edad = :edad,
                 id_categoria = :id_categoria,
                 id_club = :id_club
@@ -92,6 +96,8 @@ class Maratoon extends Conexion {
             $pdostmt->bindParam(':ciudad', $corredor->ciudad, PDO::PARAM_STR, 30);
             $pdostmt->bindParam(':fechaNacimiento', $corredor->fechaNacimiento);
             $pdostmt->bindParam(':sexo', $corredor->sexo);
+            $pdostmt->bindParam(':email', $corredor->email, PDO::PARAM_STR, 45);
+            $pdostmt->bindParam(':dni', $corredor->dni, PDO::PARAM_STR, 9);
             $pdostmt->bindParam(':edad', $corredor->edad);
             $pdostmt->bindParam(':id_categoria', $corredor->id_categoria, PDO::PARAM_INT, 10);
             $pdostmt->bindParam(':id_club', $corredor->id_club, PDO::PARAM_INT, 10);
@@ -217,6 +223,36 @@ class Maratoon extends Conexion {
             exit();
         }
     }
+    public function getCorredorFormat($id) {
+        try {
+
+            $query = "SELECT 
+                co.id,
+                CONCAT_WS(', ', co.apellidos, co.nombre) as nombreCorredor,
+                co.ciudad,
+                co.email,
+                co.edad,
+                ca.nombreCorto as categoria,
+                cl.nombreCorto as club
+                FROM corredores AS co
+                INNER JOIN categorias AS ca ON co.id_categoria = ca.id
+                INNER JOIN clubs AS cl ON co.id_club = cl.id WHERE co.id = :id ORDER BY co.id LIMIT 1;
+            ";
+
+            $pdostmt = $this->pdo->prepare($query);
+
+            $pdostmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            $pdostmt->execute();
+
+            return $pdostmt->fetch();
+        } catch (PDOException $ex) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
 
     public function getCategorias() {
         try {
@@ -233,6 +269,31 @@ class Maratoon extends Conexion {
             $pdostmt->execute();
 
             return $pdostmt;
+        } catch (PDOException $ex) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
+
+    public function categoriaCorredor($idCorredor) {
+        try {
+            $query = "SELECT
+                id,
+                nombreCorto AS categoria
+                FROM categorias WHERE id = :idcat ORDER BY id;
+            ";
+
+            $pdostmt = $this->pdo->prepare($query);
+
+            $corredor = $this->crudRead($idCorredor);
+
+            $pdostmt->bindParam(':idcat', $corredor->id_categoria, PDO::PARAM_INT);
+
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            $pdostmt->execute();
+
+            return $pdostmt->fetch();
         } catch (PDOException $ex) {
             include('views/partials/errorDB.php');
             exit();
@@ -259,4 +320,30 @@ class Maratoon extends Conexion {
             exit();
         }
     }
+
+    public function clubCorredor($idCorredor) {
+        try {
+            $query = "SELECT
+                id,
+                nombreCorto AS club
+                FROM clubs WHERE id = :idclu ORDER BY id;
+            ";
+
+            $pdostmt = $this->pdo->prepare($query);
+
+            $corredor = $this->crudRead($idCorredor);
+
+            $pdostmt->bindParam(':idclu', $corredor->id_club, PDO::PARAM_INT);
+
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            $pdostmt->execute();
+
+            return $pdostmt->fetch();
+        } catch (PDOException $ex) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
+
 }

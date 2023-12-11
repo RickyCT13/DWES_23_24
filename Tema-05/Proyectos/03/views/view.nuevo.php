@@ -52,7 +52,7 @@
                         <label class="form-check-label" for="sexo">Mujer</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo" value=" ">
+                        <input class="form-check-input" type="radio" name="sexo" value="">
                         <label class="form-check-label" for="sexo">Sin especificar</label>
                     </div>
                 </div>

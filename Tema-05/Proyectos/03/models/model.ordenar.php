@@ -1,20 +1,16 @@
 <?php 
 
-# Generar la tabla
-
 setlocale(LC_MONETARY, "es_ES");
 
 // Conexión con la base de datos
-$db = new Fp();
+$db = new Maratoon();
 
 // Cargar alumnos
-$alumnos = $db->getAlumnos();
+$corredores = $db->getCorredores();
 
-$cursos = $db->getCursos();
+$categorias = $db->getCategorias();
 
-$criterio = $_GET['criterio'];
-
-$alumnos = $db->order($criterio);
+$clubs = $db->getClubs();
 
 
 ?>

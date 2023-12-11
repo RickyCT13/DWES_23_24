@@ -10,84 +10,72 @@
     <div class="container" style="padding: 1em 1em;">
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-clipboard2-plus-fill"></i>
-            <span class="fs-3">Mostrar Alumno</span>
+            <span class="fs-3">Añadir Corredor</span>
         </header>
 
-        <legend>Datos del alumno</legend>
+        <legend>Formulario Añadir Corredor</legend>
         <form>
-            <!-- Id -->
-            <div class="mb-3">
-                <label for="id" class="form-label">Id</label>
-                <input type="text" class="form-control" name="id" value="<?= $alumnoEdit->id ?>" disabled>
-            </div>
             <!-- Nombre -->
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?= $alumnoEdit->nombre ?>" disabled>
+                <input type="text" class="form-control" name="nombre" value="<?=$corredor->nombre?>" disabled>
             </div>
 
             <!-- Apellidos -->
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?= $alumnoEdit->apellidos ?>" disabled>
+                <input type="text" class="form-control" name="apellidos" value="<?=$corredor->apellidos?>" disabled>
             </div>
 
-            <!-- Email -->
+            <!-- Ciudad -->
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" name="email" value="<?= $alumnoEdit->email ?>" disabled>
-            </div>
-
-            <!-- Teléfono -->
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" name="telefono" value="<?= $alumnoEdit->telefono ?>" disabled>
-            </div>
-
-            <!-- Dirección -->
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" name="direccion" value="<?= $alumnoEdit->direccion ?>" disabled>
-            </div>
-
-            <!-- Población -->
-            <div class="mb-3">
-                <label for="poblacion" class="form-label">Población</label>
-                <input type="text" class="form-control" name="poblacion" value="<?= $alumnoEdit->poblacion ?>" disabled>
-            </div>
-
-            <!-- Provincia -->
-            <div class="mb-3">
-                <label for="provincia" class="form-label">Provincia</label>
-                <input type="text" class="form-control" name="provincia" value="<?= $alumnoEdit->provincia ?>" disabled>
-            </div>
-
-            <!-- Nacionalidad -->
-            <div class="mb-3">
-                <label for="nacionalidad" class="form-label">Nacionalidad</label>
-                <input type="text" class="form-control" name="nacionalidad" value="<?= $alumnoEdit->nacionalidad ?>" disabled>
-            </div>
-
-            <!-- DNI -->
-            <div class="mb-3">
-                <label for="dni" class="form-label">DNI</label>
-                <input type="text" class="form-control" name="dni" value="<?= $alumnoEdit->dni ?>" disabled>
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <input type="text" class="form-control" name="ciudad" value="<?=$corredor->ciudad?>" disabled>
             </div>
 
             <!-- Fecha de nacimiento -->
             <div class="mb-3">
                 <label for="fechaNac" class="form-label">Fecha de nacimiento</label>
-                <input type="date" class="form-control" name="fechaNac" value="<?= $alumnoEdit->fechaNac ?>" disabled>
+                <input type="text" class="form-control" name="fechaNac" value="<?=$corredor->fechaNacimiento?>" disabled>
             </div>
 
-            <!-- Curso -->
+            <!-- Sexo -->
             <div class="mb-3">
-                <label for="curso" class="form-label">Curso</label>
-                <?php foreach ($cursos as $curso): ?>
-                    <?php if ($curso->id === $alumnoEdit->id_curso): ?>
-                        <input type="text" class="form-control" name="curso" value="<?= $curso->curso ?>" disabled>
-                    <?php endif; ?>
-                <?php endforeach; ?>
+                <label for="email" class="form-label">Sexo</label>
+                <?php switch ($corredor->sexo): ?><?php case 'H': ?>
+                        <input type="text" class="form-control" name="categoria" value="Hombre" disabled>
+                        <?php break; ?>
+                    <?php case 'M': ?>
+                        <input type="text" class="form-control" name="categoria" value="Mujer" disabled>
+                        <?php break; ?>
+                    <?php case '': ?>
+                        <input type="text" class="form-control" name="categoria" value="Sin especificar" disabled>
+                        <?php break; ?>
+                <?php endswitch; ?>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" name="email" value="<?=$corredor->email?>" disabled>
+            </div>
+
+            <!-- DNI -->
+            <div class="mb-3">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control" name="dni" value="<?=$corredor->dni?>" disabled>
+            </div>
+
+            <!-- Categoria -->
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoria</label>
+                <input type="text" class="form-control" name="categoria" value="<?=$categoria->categoria?>" disabled>
+            </div>
+
+            <!-- Club -->
+            <div class="mb-3">
+                <label for="club" class="form-label">Club</label>
+                <input type="text" class="form-control" name="club" value="<?=$club->club?>" disabled>
             </div>
 
             <a class="btn btn-secondary" href="index.php" role="button">Volver</a>

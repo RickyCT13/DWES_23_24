@@ -4,22 +4,26 @@
 
 setlocale(LC_MONETARY, "es_ES");
 
-// Conexión con la base de datos
-$db = new Fp();
+$db = new Maratoon();
 
-// Cargar alumnos
-$alumnos = $db->getAlumnos();
+// Cargar corredores
+$corredores = $db->getCorredores();
 
-$cursos = $db->getCursos();
+$categorias = $db->getCategorias();
+
+$clubs = $db->getClubs();
 
 $id = $_GET['id'];
 
-$db->deleteAlumno($id);
+$db->crudDelete($id);
 
-$db = new Fp();
+$db = new Maratoon();
 
-$alumnos = $db->getAlumnos();
+// Cargar corredores
+$corredores = $db->getCorredores();
 
-$cursos = $db->getCursos();
+$categorias = $db->getCategorias();
+
+$clubs = $db->getClubs();
 
 ?>

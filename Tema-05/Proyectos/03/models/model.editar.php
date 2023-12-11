@@ -3,16 +3,18 @@
 setlocale(LC_MONETARY, "es_ES");
 
 // Conexión con la base de datos
-$db = new Fp();
+$db = new Maratoon();
 
 // Cargar alumnos
-$alumnos = $db->getAlumnos();
+$corredores = $db->getCorredores();
 
-$cursos = $db->getCursos();
+$categorias = $db->getCategorias();
+
+$clubs = $db->getClubs();
 
 $idEdit = $_GET['id'];
 
-$alumnoEdit = $db->readAlumno($idEdit);
+$corredorEdit = $db->crudRead($idEdit);
 
 
 

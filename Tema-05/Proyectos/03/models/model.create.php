@@ -18,6 +18,9 @@ $corredor->nombre = $_POST['nombre'];
 $corredor->apellidos = $_POST['apellidos'];
 $corredor->ciudad = $_POST['ciudad'];
 $corredor->fechaNacimiento = $_POST['fechaNac'];
+$fechaNac = new DateTime($corredor->fechaNacimiento);
+$now = new DateTime();
+$corredor->edad = intval(date_diff($fechaNac, $now)->format("%R%y"));
 $corredor->sexo = $_POST['sexo'];
 $corredor->email = $_POST['email'];
 $corredor->dni = $_POST['dni'];
@@ -26,7 +29,12 @@ $corredor->id_club = $_POST['club'];
 
 $db->crudCreate($corredor);
 
+$db = new Maratoon();
+
 $corredores = $db->getCorredores();
 
+$categorias = $db->getCategorias();
+
+$clubs = $db->getClubs();
 
 ?>

@@ -1,52 +1,41 @@
 <?php 
 
-# Generar la tabla
-
 setlocale(LC_MONETARY, "es_ES");
 
 // Conexión con la base de datos
-$db = new Fp();
+$db = new Maratoon();
 
-// Cargar alumnos
-$alumnos = $db->getAlumnos();
+$corredores = $db->getCorredores();
 
-$cursos = $db->getCursos();
+$categorias = $db->getCategorias();
 
-$idEdit = $_GET['id'];
+$clubs = $db->getClubs();
 
-$alumnoEdit = $db->readAlumno($idEdit);
+$id = $_GET['id'];
 
-$nombre = $_POST['nombre'];
-$apellidos = $_POST['apellidos'];
-$email = $_POST['email'];
-$telefono = $_POST['telefono'];
-$direccion = $_POST['direccion'];
-$poblacion = $_POST['poblacion'];
-$provincia = $_POST['provincia'];
-$nacionalidad = $_POST['nacionalidad'];
-$dni = $_POST['dni'];
-$fechaNac = $_POST['fechaNac'];
-$id_curso = $_POST['curso'];
+$corredor = new Corredor();
 
-$alumno = new Alumno();
-$alumno->nombre = $nombre;
-$alumno->apellidos = $apellidos;
-$alumno->email = $email;
-$alumno->telefono = $telefono;
-$alumno->direccion = $direccion;
-$alumno->poblacion = $poblacion;
-$alumno->provincia = $provincia;
-$alumno->nacionalidad = $nacionalidad;
-$alumno->dni = $dni;
-$alumno->fechaNac = $fechaNac;
-$alumno->id_curso = $id_curso;
+$corredor->nombre = $_POST['nombre'];
+$corredor->apellidos = $_POST['apellidos'];
+$corredor->ciudad = $_POST['ciudad'];
+$corredor->fechaNacimiento = $_POST['fechaNac'];
+$fechaNac = new DateTime($corredor->fechaNacimiento);
+$now = new DateTime();
+$corredor->edad = intval(date_diff($fechaNac, $now)->format("%R%y"));
+$corredor->sexo = $_POST['sexo'];
+$corredor->email = $_POST['email'];
+$corredor->dni = $_POST['dni'];
+$corredor->id_categoria = $_POST['categoria'];
+$corredor->id_club = $_POST['club'];
 
-$db->updateAlumno($idEdit, $alumno);
+$db->crudUpdate($id, $corredor);
 
-$db = new Fp();
+$db = new Maratoon();
 
-$alumnos = $db->getAlumnos();
+$corredores = $db->getCorredores();
 
-$cursos = $db->getCursos();
+$categorias = $db->getCategorias();
+
+$clubs = $db->getClubs();
 
 ?>
