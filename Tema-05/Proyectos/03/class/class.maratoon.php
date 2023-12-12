@@ -134,7 +134,7 @@ class Maratoon extends Conexion {
         }
     }
 
-    public function order($criterio) {
+    public function order(int $criterio) {
         try {
             $query = "SELECT 
                 co.id,
@@ -146,11 +146,11 @@ class Maratoon extends Conexion {
                 cl.nombreCorto as club
             FROM corredores AS co
             INNER JOIN categorias AS ca ON co.id_categoria = ca.id
-            INNER JOIN clubs AS cl ON co.id_club = cl.id ORDER BY :criterio";
+            INNER JOIN clubs AS cl ON co.id_club = cl.id ORDER BY :criterio;";
 
             $pdostmt = $this->pdo->prepare($query);
 
-            $pdostmt->bindParam(':criterio', $criterio);
+            $pdostmt->bindParam(':criterio', $criterio, PDO::PARAM_INT);
 
             $pdostmt->setFetchMode(PDO::FETCH_OBJ);
 

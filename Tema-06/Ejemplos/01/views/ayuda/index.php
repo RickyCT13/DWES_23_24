@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es"> 
 
@@ -21,7 +20,7 @@
 			</div>
 			<div class="card-body">
 				
-                <?php require_once("template/partials/header.php") ?>
+                <?php require_once("template/partials/cabecera.php") ?>
 
 			</div>
 		</div>
