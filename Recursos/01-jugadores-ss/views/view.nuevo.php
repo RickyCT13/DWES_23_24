@@ -40,9 +40,9 @@
                 <label for="" class="form-label"></label>
                 <select class="form-select" name="">
                 <option selected disabled>Seleccione </option>
-                    <?php foreach ():?>
+                    <?php //foreach ():?>
                         <option value=""></option>
-                    <?php endforeach; ?>
+                    <?php //endforeach; ?>
                 </select>
         </div>
         <!-- equipos -->
@@ -50,9 +50,9 @@
                 <label for="" class="form-label"></label>
                 <select class="form-select" name="">
                 <option selected disabled>Seleccione </option>
-                    <?php foreach ():?>
+                    <?php //foreach ():?>
                         <option value=""></option>
-                    <?php endforeach; ?>
+                    <?php //endforeach; ?>
                 </select>
         </div>
         
@@ -61,14 +61,14 @@
         <div class="mb-3">
             <label for="" class="form-label">Posiciones</label>
             <div class="form-control">
-                <?php foreach() ?>
+                <?php //foreach() ?>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="" value="">
                         <label class="form-check-label" for="flexCheckDefault">
                             
                         </label>
                     </div>
-                <?php endforeach; ?>
+                <?php //endforeach; ?>
             </div>
         </div>
         
