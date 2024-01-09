@@ -16,6 +16,4 @@ $_SESSION['id'] = 234;
 
 echo 'Variables creadas';
 
-
-
 ?>
