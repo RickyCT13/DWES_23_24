@@ -4,11 +4,11 @@
 session_start();
 
 // Contador de visitas
-if (isset($_SESSION['numVisitasHome'])) {
-    $_SESSION['numVisitasHome']++;
+if (isset($_SESSION['numVisitasEvents'])) {
+    $_SESSION['numVisitasEvents']++;
 }
 else {
-    $_SESSION['numVisitasHome'] = 1;
+    $_SESSION['numVisitasEvents'] = 1;
 }
 
 // Fecha y hora de inicio de sesión
@@ -39,11 +39,11 @@ if (!isset($_SESSION['fechaHoraIniSesion'])) {
     </nav>
     <h1>Detalles</h1>
     <ul>
-        <li>Nombre de la página: index.php</li>
+        <li>Nombre de la página: events.php</li>
         <li>SID: <?=session_id()?></li>
         <li>Nombre de la sesión: <?=session_name()?></li>
         <li>Fecha de inicio de sesión: <?=date_format($_SESSION['fechaHoraIniSesion'], "d/m/Y h:i:s")?></li>
-        <li>Visitas a esta página: <?=$_SESSION['numVisitasHome']?></li>
+        <li>Visitas a esta página: <?=$_SESSION['numVisitasEvents']?></li>
     </ul>
 
 </body>
