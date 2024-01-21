@@ -20,7 +20,7 @@ class CorredorModel extends Model {
             co.edad,
             ca.nombrecorto as categoria,
             cl.nombrecorto as club
-            FROM corredores AS co INNER JOIN categorias AS ca ON co.id_categoria = ca.id INNER JOIN clubs AS cl ON co.club_id = cl.id ORDER BY co.id";
+            FROM corredores AS co INNER JOIN categorias AS ca ON co.id_categoria = ca.id INNER JOIN clubs AS cl ON co.id_club = cl.id ORDER BY co.id";
 
             // Conexión a base de datos
             // db --> objeto de la clase Database
