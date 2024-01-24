@@ -23,7 +23,6 @@
             try {
                 
                 $dbh = "mysql:host=".$this->host.";dbname=".$this->db;
-                $charset = $this->charset;
                 $opciones = [
 
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

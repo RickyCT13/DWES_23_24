@@ -74,39 +74,39 @@
 
             if ($user === false) {
 
-                $errores['email'] = "Email no ha sido registrado";
+                $errores['email'] = "Este correo no está registrado";
                 $_SESSION['errores'] = $errores;
                 
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 
-                $_SESSION['error'] = "Fallo en la Autentificación";
+                $_SESSION['error'] = "Fallo en la Autenticación";
 
                 header("location:". URL. "login"); 
                 
             } else if (!password_verify($password,$user->password)) {
 
-                $errores['password'] = "Password no es correcto";
+                $errores['password'] = "La contraseña no es correcta";
                 $_SESSION['errores'] = $errores;
 
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
 
-                $_SESSION['error'] = "Fallo en la Autentificación";
+                $_SESSION['error'] = "Fallo en la Autenticación";
 
                 header("location:". URL. "login"); 
                 
             } else {
                 
-                # Autentificación completada
+                # Autenticación completada
                 $_SESSION['id'] = $user->id;
                 $_SESSION['name_user'] = $user->name;
                 $_SESSION['id_rol'] = $this->model->getUserIdPerfil($user->id);
                 $_SESSION['name_rol'] = $this->model->getUserPerfil($_SESSION['id_rol']);
 
-                $_SESSION['mensaje'] = "Usuario ". $user->name. " ha iniciado sesión" ;
+                $_SESSION['mensaje'] = "Ha iniciado sesión como ". $user->name;
                 
-                header("location:". URL. "alumno");
+                header("location:". URL. "cuenta");
             }
 
 

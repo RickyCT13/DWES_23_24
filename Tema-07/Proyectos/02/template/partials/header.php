@@ -3,7 +3,7 @@
         <!-- Titulos y subtitulos -->
         <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h4 class="display-7">Gestión Alumnos - FP - MVC </h4>
+            <h3 class="display-7">Proyecto Gesbank </h3>
             <p class="lead">Tema 7 - DWES - Curso 23/24</p>
         </div>
         </div>

@@ -11,7 +11,7 @@
 		<!-- Estilo card de bootstrap -->
 		<div class="card">
 			<div class="card-header">
-				ERROR 404
+				ERROR
 			</div>
 			<div class="card-body">
 				
