@@ -42,7 +42,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label text-end">Nombre Usuario</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="name" value="<?= $this->user->name; ?>" disabled>
+                                    <input type="text" class="form-control" name="name" value="<?= $this->user->name ?>" disabled>
                                 </div>
                             </div>
 
@@ -50,7 +50,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label text-end">Email</label>
                                 <div class="col-sm-7">
-                                    <input type="email" class="form-control" name="email" value="<?= $this->user->email; ?>" disabled>
+                                    <input type="email" class="form-control" name="email" value="<?= $this->user->email ?>" disabled>
                                 </div>
 
                             </div>
