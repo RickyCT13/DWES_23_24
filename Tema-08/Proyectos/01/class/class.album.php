@@ -28,8 +28,8 @@ class ClassAlbum {
         $lugar = null,
         $categoria = null,
         $etiquetas = null,
-        $num_fotos = null,
-        $num_visitas = null,
+        $num_fotos = 0,
+        $num_visitas = 0,
         $carpeta = null
     ) {
         $this->id = $id;

@@ -51,7 +51,7 @@
                             <!-- botones acción -->
                             <div class="row mb-3">
                                 <div class="col-sm-9 offset-sm-3">
-                                    <a class="btn btn-secondary" href="<?=URL?>alumnos" role="button">Cancelar</a>
+                                    <a class="btn btn-secondary" href="<?=URL?>album" role="button">Cancelar</a>
                                     <button type="submit" class="btn btn-danger">Eliminar Perfil</button>
                                 </div>
                             </div>

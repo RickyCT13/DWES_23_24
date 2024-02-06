@@ -78,7 +78,9 @@ class AlbumModel extends Model {
                 :etiquetas,
                 NULL,
                 NULL,
-                :carpeta
+                :carpeta,
+                NULL,
+                NULL
             );";
 
             /*
@@ -123,13 +125,7 @@ class AlbumModel extends Model {
                 Sentencia SQL
             */
             $sql = "SELECT
-                id,
-                titulo,
-                lugar,
-                categoria,
-                etiquetas,
-                num_fotos,
-                num_visitas
+                *
                 FROM albumes WHERE id = :id ORDER BY id;
             ";
 

@@ -2,20 +2,20 @@
     class loginModel extends Model {
 
 
-    # Devuelve un objeto de la clase Users a partir del email de usuario
+    # Devuelve un objeto de la clase album.users a partir del email de usuario
     public function getUserEmail($email) {
         try {
 
-            $sql = "SELECT * FROM Users WHERE email= :email LIMIT 1";
-            $pdo = $this->db->connect();
-            $stmt = $pdo->prepare($sql);
-            $stmt->setFetchMode(PDO::FETCH_OBJ);
-            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-            $stmt->execute();
+            $sql = "SELECT * FROM album.users WHERE email= :email LIMIT 1";
+            $connection = $this->db->connect();
+            $pdostmt = $connection->prepare($sql);
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+            $pdostmt->bindParam(":email", $email, PDO::PARAM_STR);
+            $pdostmt->execute();
             
-            return $stmt->fetch();
+            return $pdostmt->fetch();
 
-        }  catch (PDOException $e) {
+        }  catch (PDOException $ex) {
             
             include_once('template/partials/errorDB.php');
             exit();
@@ -28,23 +28,23 @@
 
         try {
 
-            $selectSQL = "SELECT 
+            $sql = "SELECT 
                         ru.role_id
                     FROM
-                        users u
+                        album.users u
                     INNER JOIN
                         roles_users ru ON u.id = ru.user_id
                     WHERE
                         u.id = :id
                     LIMIT 1";
-            $pdo = $this->db->connect();
-            $resultado = $pdo->prepare($selectSQL);
-            $resultado->setFetchMode(PDO::FETCH_OBJ);
-            $resultado->bindParam(':id', $id, PDO::PARAM_INT);
-            $resultado->execute();
-            return $resultado->fetch()->role_id;
+            $connection = $this->db->connect();
+            $pdostmt = $connection->prepare($sql);
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+            $pdostmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $pdostmt->execute();
+            return $pdostmt->fetch()->role_id;
 
-        } catch (PDOException $e) {
+        } catch (PDOException $ex) {
             
             include_once('template/partials/errorDB.php');
             exit();
@@ -59,7 +59,7 @@
 
         try {
 
-            $selectSQL = "SELECT 
+            $sql = "SELECT 
                         name
                     FROM
                         roles
@@ -67,14 +67,14 @@
                         id = :id
                     LIMIT 1";
 
-            $pdo = $this->db->connect();
-            $resultado = $pdo->prepare($selectSQL);
-            $resultado->setFetchMode(PDO::FETCH_OBJ);
-            $resultado->bindParam(':id', $id, PDO::PARAM_INT);
-            $resultado->execute();
-            return $resultado->fetch()->name;
+            $connection = $this->db->connect();
+            $pdostmt = $connection->prepare($sql);
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+            $pdostmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $pdostmt->execute();
+            return $pdostmt->fetch()->name;
 
-        } catch (PDOException $e) {
+        } catch (PDOException $ex) {
             
             include_once('template/partials/errorDB.php');
             exit();

@@ -10,7 +10,7 @@
 echo 'Directorio actual: ' . getcwd();
 
 // Abrir directorio con opendir()
-if ($gestor = opendir('file')) {
+if ($gestor = opendir('files')) {
     echo 'Gestor de directorio: ' . $gestor . '<br>';
 
     // Leer contenido del dir. con readdir()

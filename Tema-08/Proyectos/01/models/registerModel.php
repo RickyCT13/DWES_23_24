@@ -23,16 +23,16 @@
 
         try {
             
-            $selectSQL = "SELECT * FROM users WHERE email = :email";
-            $pdo = $this->db->connect();
-            $pdoSt = $pdo->prepare($selectSQL);
-            $pdoSt->bindParam(':email', $email, PDO::PARAM_STR, 50);
-            $pdoSt->execute();
-            if ($pdoSt->rowCount() > 0)
+            $sql = "SELECT * FROM album.users WHERE email = :email";
+            $connection = $this->db->connect();
+            $pdostmt = $connection->prepare($sql);
+            $pdostmt->bindParam(':email', $email, PDO::PARAM_STR, 50);
+            $pdostmt->execute();
+            if ($pdostmt->rowCount() > 0)
                 return false;
             else 
                 return true;
-        } catch (PDOException $e) {
+        } catch (PDOException $ex) {
             
             include_once('template/partials/errorDB.php');
             exit();
@@ -48,7 +48,7 @@
             
             $password_encriptado = password_hash($pass, CRYPT_BLOWFISH);
            
-            $insertarsql = "INSERT INTO users VALUES (
+            $sql = "INSERT INTO album.users VALUES (
                  null,
                 :nombre,
                 :email,
@@ -56,18 +56,18 @@
                 default,
                 default)";
 
-            $pdo = $this->db->connect();
-            $stmt = $pdo->prepare($insertarsql);
+            $connection = $this->db->connect();
+            $pdostmt = $connection->prepare($sql);
 
-            $stmt->bindParam(':nombre', $name, PDO::PARAM_STR, 50);
-            $stmt->bindParam(':email', $email , PDO::PARAM_STR, 50);
-            $stmt->bindParam(':pass', $password_encriptado, PDO::PARAM_STR, 60) ;
-            $stmt->execute();
+            $pdostmt->bindParam(':nombre', $name, PDO::PARAM_STR, 50);
+            $pdostmt->bindParam(':email', $email , PDO::PARAM_STR, 50);
+            $pdostmt->bindParam(':pass', $password_encriptado, PDO::PARAM_STR, 60) ;
+            $pdostmt->execute();
 
             # Asignamos rol de registrado
             // Rol que asignaremos por defecto
             $role_id = 3;
-            $insertarsql = "INSERT INTO roles_users VALUES (
+            $sql = "INSERT INTO roles_users VALUES (
                 null,
                 :user_id,
                 :role_id,
@@ -75,15 +75,15 @@
                 default)";
             
             # Obtener id del último usuario insertado
-            $ultimo_id = $pdo->lastInsertId();
+            $ultimo_id = $connection->lastInsertId();
 
-            $stmt = $pdo->prepare($insertarsql);
+            $pdostmt = $connection->prepare($sql);
 
-            $stmt->bindParam(':user_id', $ultimo_id);
-            $stmt->bindParam(':role_id', $role_id);
-            $stmt->execute();
+            $pdostmt->bindParam(':user_id', $ultimo_id);
+            $pdostmt->bindParam(':role_id', $role_id);
+            $pdostmt->execute();
 
-        }  catch (PDOException $e) {
+        }  catch (PDOException $ex) {
             
             include_once('template/partials/errorDB.php');
             exit();
