@@ -583,6 +583,7 @@ class Album extends Controller {
             /*
                 Comprobación exitosa
             */
+            
 
             /*
                 Mostrar mensaje en caso de que haya uno
@@ -745,5 +746,9 @@ class Album extends Controller {
 
             header('location:' . URL . 'album');
         }
+
+    }
+    function contarVisitas($param = []) {
+        
     }
 }
