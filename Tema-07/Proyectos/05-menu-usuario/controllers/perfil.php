@@ -7,7 +7,7 @@ class Perfil extends Controller {
 
         # Iniciamos o continuamos con la sesión
         /* sec_session_start(): función personalizada para sesiones seguras, no se usará por ahora */
-        session_start();
+        sec_session_start();
 
         # Capa autentificación
         if (!isset($_SESSION['id'])) {
@@ -32,7 +32,7 @@ class Perfil extends Controller {
     public function edit() {
 
         # Iniciamos o continuamos sesión
-        session_start();
+        sec_session_start();
 
         # Capa de autentificación
         if (!isset($_SESSION['id'])) {
@@ -74,7 +74,7 @@ class Perfil extends Controller {
     public function valperfil() {
 
         # Iniciamos o continuamos con la sesión
-        session_start();
+        sec_session_start();
 
         # Capa autentificación
         if (!isset($_SESSION['id'])) {
@@ -147,7 +147,7 @@ class Perfil extends Controller {
     public function pass() {
 
         # Iniciamos o continuamos sesión
-        session_start();
+        sec_session_start();
 
         # Capa de autentificación
         if (!isset($_SESSION['id'])) {
@@ -183,7 +183,7 @@ class Perfil extends Controller {
     public function valpass() {
 
         # Iniciamos o continuamos con la sesión
-        session_start();
+        sec_session_start();
 
         # Capa autentificación
         if (!isset($_SESSION['id'])) {
@@ -250,7 +250,7 @@ class Perfil extends Controller {
     public function delete() {
 
         # Iniciamos o continuamos con la sesión
-        session_start();
+        sec_session_start();
 
         # Capa autentificación
         if (!isset($_SESSION['id'])) {

@@ -5,7 +5,7 @@
         public function render() {
 
             # iniciamos o continuar sessión
-            session_start();
+            sec_session_start();
 
             # Si existe algún mensaje 
             if (isset($_SESSION['mensaje'])) {
@@ -47,7 +47,7 @@
     public function validate() {
 
         # Iniciamos o continuamos con la sesión
-        session_start();
+        sec_session_start();
 
         # Saneamos el formulario
         $name = filter_var($_POST['name'],FILTER_SANITIZE_SPECIAL_CHARS);

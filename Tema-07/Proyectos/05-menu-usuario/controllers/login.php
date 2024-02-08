@@ -6,7 +6,7 @@
         public function render() {
 
             # Iniciar o continuar sesión segura
-            session_start();
+            sec_session_start();
 
             # Inicializo los valores del formulario
             $this->view->email = null;
@@ -59,7 +59,7 @@
         public function validate() {
 
             # Inicio o reanudación de sessión
-            session_start();
+            sec_session_start();
 
             # Saneamos el formulario
             $email = filter_var($_POST['email'] ??= '',FILTER_SANITIZE_EMAIL);

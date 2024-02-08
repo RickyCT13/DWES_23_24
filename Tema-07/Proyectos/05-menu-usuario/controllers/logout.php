@@ -4,7 +4,7 @@
 
         function render() {
 
-            session_start();
+            sec_session_start();
 
             // Destruir todas las variables de sesión.
             $_SESSION = array();
@@ -20,7 +20,7 @@
             }
 
             // Finalmente, destruir la sesión.
-            session_destroy();
+            sec_session_destroy();
 
             header("location:".URL."index");
         }

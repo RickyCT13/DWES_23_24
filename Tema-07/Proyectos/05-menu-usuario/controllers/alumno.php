@@ -15,7 +15,7 @@ class Alumno extends Controller
     {
 
         # inicio o continuo sesión
-        session_start();
+        sec_session_start();
 
         # compruebo usuario autentificado
         if (!isset($_SESSION['id'])) {
@@ -48,7 +48,7 @@ class Alumno extends Controller
     {
 
         # iniciar o continuar  sesión
-        session_start();
+        sec_session_start();
 
         # compruebo usuario autentificado
         if (!isset($_SESSION['id'])) {
@@ -97,7 +97,7 @@ class Alumno extends Controller
     {
 
         # Iniciar sesión
-        session_start();
+        sec_session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
@@ -223,7 +223,7 @@ class Alumno extends Controller
     {
 
         # iniciamos sesión
-        session_start();
+        sec_session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
@@ -280,7 +280,7 @@ class Alumno extends Controller
     {
 
         # iniciar sesión
-        session_start();
+        sec_session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
@@ -417,7 +417,7 @@ class Alumno extends Controller
     {
 
         # inicio o continúo sesión
-        session_start();
+        sec_session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
@@ -448,7 +448,7 @@ class Alumno extends Controller
     {
 
         # inicio o continúo sesión
-        session_start();
+        sec_session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
@@ -476,7 +476,7 @@ class Alumno extends Controller
     {
 
         # inicar sesión
-        session_start();
+        sec_session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
