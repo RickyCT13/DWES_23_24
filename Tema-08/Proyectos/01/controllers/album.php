@@ -10,7 +10,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -53,7 +53,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -126,7 +126,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -271,7 +271,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -355,7 +355,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -513,7 +513,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -568,7 +568,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -631,7 +631,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -668,7 +668,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado
@@ -704,7 +704,7 @@ class Album extends Controller {
         /*
             Iniciar o continuar sesión
         */
-        session_start();
+        sec_session_start();
 
         /*
             Comprobar si el usuario está autenticado

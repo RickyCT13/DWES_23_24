@@ -20,9 +20,9 @@
 					<div class="col">
 						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 							<legend>Vista Mostrar Álbum: <?= $this->album->titulo ?></legend>
-							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Información</a>
-							<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Album</button>			
-							<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Ambos</button>
+							<a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Ver información</a>
+							<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Ver fotos</button>			
+							<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Alternar</button>
 						</div>
 						<h3>El album contiene: <?php echo (count(glob("images/" . $this->album->carpeta . "/*")));?> fotos</h3>
 					</div>

@@ -73,16 +73,16 @@
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = "Email: Email no válido";
         } elseif (!$this->model->validateEmailUnique($email)) {
-            $errores['email'] = "Email existente, ya está registrado";
+            $errores['email'] = "Ya hay un usuario con este correo";
         }
 
         # Validar password
         if (empty($password)) {
-            $errores['password'] = "No se ha introducido password";
+            $errores['password'] = "No se ha introducido contraseña";
         } else if (strcmp($password, $password_confirm) !== 0) {
-            $errores['password'] = "Password no coincidentes";
+            $errores['password'] = "Las contraseñas no coinciden";
         } elseif (!$this->model->validatePass($password)) {
-            $errores['password'] = "Password: No permitido";
+            $errores['password'] = "Contraseña no permitida";
         }
 
         if (!empty($errores)) {
