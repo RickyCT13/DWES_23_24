@@ -6,7 +6,7 @@ class PerfilModel extends Model {
     public function getUserId($id) {
         try {
 
-            $sql = "SELECT * FROM gesbank.users WHERE id= :id LIMIT 1";
+            $sql = "SELECT * FROM users WHERE id= :id LIMIT 1";
             $connection = $this->db->connect();
             $pdostmt = $connection->prepare($sql);
             $pdostmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'classUser');
@@ -27,7 +27,7 @@ class PerfilModel extends Model {
 
             $password_encriptado = password_hash($user->password, CRYPT_BLOWFISH);
             $update = "
-                        UPDATE gesbank.users SET
+                        UPDATE users SET
                             password = :password
                         WHERE id = :id      
                         ";
@@ -51,7 +51,7 @@ class PerfilModel extends Model {
 
         try {
             $sql = "
-                    SELECT * FROM gesbank.users
+                    SELECT * FROM users
                     WHERE name = :name
             ";
 
@@ -77,7 +77,7 @@ class PerfilModel extends Model {
 
         try {
             $sql = "
-                SELECT * FROM gesbank.users 
+                SELECT * FROM users 
                 WHERE email = :email
         ";
 
@@ -103,7 +103,7 @@ class PerfilModel extends Model {
         try {
 
             $update = "
-                        UPDATE gesbank.users SET
+                        UPDATE users SET
                             name = :name,
                             email = :email
                         WHERE id = :id
@@ -129,7 +129,7 @@ class PerfilModel extends Model {
 
         try {
             $delete = "
-                    DELETE FROM gesbank.users 
+                    DELETE FROM users 
                     WHERE id = :id      
                 ";
 

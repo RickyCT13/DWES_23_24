@@ -10,6 +10,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL ?>cuenta/new">Nuevo</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#import" href="#">Importar Datos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= URL ?>cuenta/exportCSV">Exportar Datos</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">

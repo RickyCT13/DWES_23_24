@@ -367,7 +367,7 @@ class Cuenta extends Controller {
             /*
                 Comprobación exitosa
             */
-            
+
             /*
                 Mostrar mensaje en caso de que haya uno
                 Tras esto, borrar la variable de sesión para
@@ -391,7 +391,7 @@ class Cuenta extends Controller {
         }
     }
 
-    function show($param = []) { 
+    function show($param = []) {
         /*
             Iniciar o continuar sesión
         */
@@ -410,7 +410,7 @@ class Cuenta extends Controller {
             /*
                 Comprobación exitosa
             */
-            
+
             /*
                 Mostrar mensaje en caso de que haya uno
                 Tras esto, borrar la variable de sesión para
@@ -434,7 +434,7 @@ class Cuenta extends Controller {
     }
 
 
-    function order($param = []) { 
+    function order($param = []) {
         /*
             Iniciar o continuar sesión
         */
@@ -493,7 +493,7 @@ class Cuenta extends Controller {
             /*
                 Comprobación exitosa
             */
-            
+
             /*
                 Mostrar mensaje en caso de que haya uno
                 Tras esto, borrar la variable de sesión para
@@ -511,6 +511,141 @@ class Cuenta extends Controller {
             $this->view->cuenta = $this->model->filter($expresion);
 
             $this->view->render('cuenta/main/index');
+        }
+    }
+    function exportCSV() {
+        /*
+            Iniciar o continuar sesión
+        */
+        sec_session_start();
+
+        /*
+            Comprobar si el usuario está autenticado
+        */
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autenticar";
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export']))) {
+            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
+            header('location:' . URL . 'index');
+        } else {
+            /*
+                Comprobación exitosa
+            */
+
+            /*
+                Mostrar mensaje en caso de que haya uno
+                Tras esto, borrar la variable de sesión para
+                evitar que se muestre múltiples veces
+            */
+            if (isset($_SESSION['mensaje'])) {
+                $this->view->mensaje = $_SESSION['mensaje'];
+                unset($_SESSION['mensaje']);
+            }
+
+            /*
+                Obtener los datos de las cuentas, almacenándolos en un
+                array asociativo estableciendo el "Fetch Mode"
+            */
+            $cuentas = $this->model->getAllData()->fetchAll(PDO::FETCH_ASSOC);
+
+            /*
+                Establecemos el nombre del archivo csv a exportar
+            */
+            $fileName = 'cuentas.csv';
+
+            /*
+                Enviar cabecera(s) HTTP
+                La primera línea especifica que se enviará un archivo CSV
+                En la segunda línea se especifica el nombre del archivo
+            */
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+            /*
+                Creamos / Abrimos un archivo csv para escritura.
+                Se añade el modificador 'b' para evitar incompatibilidades
+            */
+            $file = fopen('php://output', 'wb');
+
+            /* 
+                Escribir cabecera de CSV
+            */
+            $fileHeader = ['id', 'num_cuenta', 'id_cliente', 'fecha_alta', 'fecha_ul_mov', 'fecha_movtos', 'saldo', 'create_at', 'update_at'];
+            fputcsv($file, $fileHeader, ';');
+
+            /*
+                Iterar sobre el array de cuentas, escribiendo cada registro en el CSV
+            */
+            foreach ($cuentas as $cuenta) {
+                fputcsv($file, $cuenta, ';');
+            }
+
+            /*
+                Cerramos el flujo, aplicándose los cambios
+            */
+            fclose($file);
+        }
+    }
+    function importCSV() {
+        /*
+            Iniciar o continuar sesión
+        */
+        sec_session_start();
+
+        /*
+            Comprobar si el usuario está autenticado
+        */
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autenticar";
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['import']))) {
+            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
+            header('location:' . URL . 'index');
+        } else {
+            /*
+                Comprobación exitosa
+            */
+
+              /*
+                Mostrar mensaje en caso de que haya uno
+                Tras esto, borrar la variable de sesión para
+                evitar que se muestre múltiples veces
+            */
+            if (isset($_SESSION['mensaje'])) {
+                $this->view->mensaje = $_SESSION['mensaje'];
+                unset($_SESSION['mensaje']);
+            }
+            /*
+                Abrir archivo con permisos de lectura
+                Se añade el mod. 'b' para evitar incompatibilidades
+            */
+            $file = fopen($_FILES['archivo_csv']['tmp_name'], 'rb');
+            
+            /*
+                Se obtiene la cabecera del fichero csv
+            */
+            $header = fgetcsv($file);
+
+            /*
+                Añadimos los registros a la tabla
+            */
+            while (($row = fgetcsv($file)) !== false) {
+                $cuenta = new ClassCuenta(
+                    $row[1],
+                    $row[2],
+                    $row[3],
+                    $row[4],
+                    $row[5],
+                    $row[6]
+                );
+                $this->model->create($cuenta);
+            }
+
+            /*
+                Cerramos el archivo
+            */
+            fclose($file);
         }
     }
 }
