@@ -587,6 +587,42 @@ class Cuenta extends Controller {
             fclose($file);
         }
     }
+
+    function import() {
+        /*
+            Iniciar o continuar sesión
+        */
+        sec_session_start();
+
+        /*
+            Comprobar si el usuario está autenticado
+        */
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autenticar";
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['edit']))) {
+            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
+            header('location:' . URL . 'index');
+        } else {
+            /*
+                Comprobación exitosa
+            */
+
+            /*
+                Mostrar mensaje en caso de que haya uno
+                Tras esto, borrar la variable de sesión para
+                evitar que se muestre múltiples veces
+            */
+            if (isset($_SESSION['mensaje'])) {
+                $this->view->mensaje = $_SESSION['mensaje'];
+                unset($_SESSION['mensaje']);
+            }
+
+            $this->view->title = "Añadir - Gestión Cuentas";
+
+            $this->view->render('cuenta/import/index');
+        }
+    }
     function importCSV() {
         /*
             Iniciar o continuar sesión
@@ -620,12 +656,8 @@ class Cuenta extends Controller {
                 Abrir archivo con permisos de lectura
                 Se añade el mod. 'b' para evitar incompatibilidades
             */
-            $file = fopen($_FILES['archivo_csv']['tmp_name'], 'rb');
+            $file = fopen($_FILES['file']['tmp_name'], 'r');
             
-            /*
-                Se obtiene la cabecera del fichero csv
-            */
-            $header = fgetcsv($file);
 
             /*
                 Añadimos los registros a la tabla
