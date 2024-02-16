@@ -32,6 +32,8 @@
 			<div class="card-header">
 				<!-- Menú -->
 				<?php require_once("views/cuenta/partials/menu.php") ?>
+				<!-- Modal -->
+				<?php require("views/cuenta/partials/modal.php")?>
 			</div>
 			<div class="card-body">
 

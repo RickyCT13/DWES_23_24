@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?= URL ?>cuenta">Cuentas</a>
+        <a class="navbar-brand" href="<?= URL ?>cuenta">Cuenta</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,11 +10,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL ?>cuenta/new">Nuevo</a>
                 </li>
+                <!-- Agregar opción para exportar CSV -->
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= URL ?>cuenta/import">Importar Datos</a>
+                    <a class="nav-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export']) || in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export'])) ? 'active' : 'disabled' ?>"" href="<?= URL ?>cuenta/exportCSV">Exportar CSV</a>
                 </li>
+                <!-- Agregar opción para importar CSV -->
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= URL ?>cuenta/exportCSV">Exportar Datos</a>
+                    <button type="button" class="nav-link btn btn-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['import']) || in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['import'])) ? '' : 'disabled' ?>" data-bs-toggle="modal" data-bs-target="#importarModal">Importar CSV</button>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

@@ -31,7 +31,7 @@ class Cuenta extends Controller {
                 $this->view->mensaje = $_SESSION['mensaje'];
                 unset($_SESSION['mensaje']);
             }
-            $this->view->title = "Home - Panel Control Cuentas";
+            $this->view->title = "Home - Panel Control cuenta";
 
             $this->view->cuenta = $this->model->get();
 
@@ -92,7 +92,7 @@ class Cuenta extends Controller {
                 unset($_SESSION['cuenta']);
             }
 
-            $this->view->title = "Añadir - Gestión Cuentas";
+            $this->view->title = "Añadir - Gestión cuenta";
 
             $this->view->render('cuenta/new/index');
         }
@@ -181,7 +181,7 @@ class Cuenta extends Controller {
                 // Mensaje
                 $_SESSION['mensaje'] = 'Cuenta creada con éxito';
 
-                // Redirección a pág principal cuentas
+                // Redirección a pág principal cuenta
                 header('Location: ' . URL . 'cuenta');
             }
         }
@@ -342,7 +342,7 @@ class Cuenta extends Controller {
                 // Mensaje
                 $_SESSION['mensaje'] = 'Cuenta editada con éxito';
 
-                // Redirección a pág principal cuentas
+                // Redirección a pág principal cuenta
                 header('Location: ' . URL . 'cuenta');
             }
         }
@@ -466,7 +466,7 @@ class Cuenta extends Controller {
 
             $criterio = $param[0];
 
-            $this->view->title = "Ordenar - Panel de Control cuentas";
+            $this->view->title = "Ordenar - Panel de Control cuenta";
 
             $this->view->cuenta = $this->model->order($criterio);
 
@@ -506,7 +506,7 @@ class Cuenta extends Controller {
 
             $expresion = $_GET['expresion'];
 
-            $this->view->title = "Buscar - Gestión Cuentas";
+            $this->view->title = "Buscar - Gestión cuenta";
 
             $this->view->cuenta = $this->model->filter($expresion);
 
@@ -544,7 +544,7 @@ class Cuenta extends Controller {
             }
 
             /*
-                Obtener los datos de las cuentas, almacenándolos en un
+                Obtener los datos de las cuenta, almacenándolos en un
                 array asociativo estableciendo el "Fetch Mode"
             */
             $cuentas = $this->model->getAllData()->fetchAll(PDO::FETCH_ASSOC);
@@ -566,18 +566,14 @@ class Cuenta extends Controller {
                 Creamos / Abrimos un archivo csv para escritura.
                 Se añade el modificador 'b' para evitar incompatibilidades
             */
-            $file = fopen('php://output', 'wb');
-
-            /* 
-                Escribir cabecera de CSV
-            */
-            $fileHeader = ['id', 'num_cuenta', 'id_cliente', 'fecha_alta', 'fecha_ul_mov', 'fecha_movtos', 'saldo', 'create_at', 'update_at'];
-            fputcsv($file, $fileHeader, ';');
+            $file = fopen('php://output', 'w');
 
             /*
-                Iterar sobre el array de cuentas, escribiendo cada registro en el CSV
+                Iterar sobre el array de cuenta, escribiendo cada registro en el CSV
             */
             foreach ($cuentas as $cuenta) {
+                
+                array_shift($cuenta);
                 fputcsv($file, $cuenta, ';');
             }
 
@@ -588,41 +584,6 @@ class Cuenta extends Controller {
         }
     }
 
-    function import() {
-        /*
-            Iniciar o continuar sesión
-        */
-        sec_session_start();
-
-        /*
-            Comprobar si el usuario está autenticado
-        */
-        if (!isset($_SESSION['id'])) {
-            $_SESSION['notify'] = "Usuario sin autenticar";
-            header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['edit']))) {
-            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
-            header('location:' . URL . 'index');
-        } else {
-            /*
-                Comprobación exitosa
-            */
-
-            /*
-                Mostrar mensaje en caso de que haya uno
-                Tras esto, borrar la variable de sesión para
-                evitar que se muestre múltiples veces
-            */
-            if (isset($_SESSION['mensaje'])) {
-                $this->view->mensaje = $_SESSION['mensaje'];
-                unset($_SESSION['mensaje']);
-            }
-
-            $this->view->title = "Añadir - Gestión Cuentas";
-
-            $this->view->render('cuenta/import/index');
-        }
-    }
     function importCSV() {
         /*
             Iniciar o continuar sesión
@@ -635,15 +596,17 @@ class Cuenta extends Controller {
         if (!isset($_SESSION['id'])) {
             $_SESSION['notify'] = "Usuario sin autenticar";
             header("location:" . URL . "login");
+            exit();
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['import']))) {
             $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
-            header('location:' . URL . 'index');
+            header('location:' . URL . 'cuenta');
+            exit();
         } else {
             /*
                 Comprobación exitosa
             */
 
-              /*
+            /*
                 Mostrar mensaje en caso de que haya uno
                 Tras esto, borrar la variable de sesión para
                 evitar que se muestre múltiples veces
@@ -652,32 +615,59 @@ class Cuenta extends Controller {
                 $this->view->mensaje = $_SESSION['mensaje'];
                 unset($_SESSION['mensaje']);
             }
-            /*
-                Abrir archivo con permisos de lectura
-                Se añade el mod. 'b' para evitar incompatibilidades
-            */
-            $file = fopen($_FILES['file']['tmp_name'], 'r');
-            
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["archivo_csv"]) && $_FILES["archivo_csv"]["error"] == UPLOAD_ERR_OK) {
+                $file = $_FILES["archivo_csv"]["tmp_name"];
 
-            /*
-                Añadimos los registros a la tabla
-            */
-            while (($row = fgetcsv($file)) !== false) {
-                $cuenta = new ClassCuenta(
-                    $row[1],
-                    $row[2],
-                    $row[3],
-                    $row[4],
-                    $row[5],
-                    $row[6]
-                );
-                $this->model->create($cuenta);
+                $handle = fopen($file, "r");
+
+                if ($handle !== FALSE) {
+                    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                        if (count($data) == 0) {
+                            echo 'vacio';
+                            exit();
+                        }
+                        $num_cuenta = $data[0];
+                        $id_cliente = $data[1];
+                        $fecha_alta = $data[2];
+                        $fecha_ul_mov = $data[3];
+                        $num_movtos = $data[4];
+                        $saldo = $data[5];
+
+                        //Método para verificar número de cuenta único.
+                        if ($this->model->validateNumCuenta($num_cuenta)) {
+                            // Si no existe, crear una nueva cuenta
+                            $cuenta = new ClassCuenta(
+                                null,
+                                $num_cuenta,
+                                $id_cliente,
+                                $fecha_alta,
+                                $fecha_ul_mov,
+                                $num_movtos,
+                                $saldo
+                            );
+
+                            //Usamos create para meter la cuenta en la base de datos
+                            $this->model->create($cuenta);
+                        } else {
+                            //Error de cuenta existente
+                            echo "Error, esta cuenta ya existe en la base de datos";
+                        }
+                    }
+
+                    fclose($handle);
+                    $_SESSION['mensaje'] = "Importación realizada correctamente";
+                    header('location:' . URL . 'cuenta');
+                    exit();
+                } else {
+                    $_SESSION['error'] = "Error con el archivo CSV";
+                    header('location:' . URL . 'cuenta');
+                    exit();
+                }
+            } else {
+                $_SESSION['error'] = "Seleccione un archivo CSV";
+                header('location:' . URL . 'cuenta');
+                exit();
             }
-
-            /*
-                Cerramos el archivo
-            */
-            fclose($file);
         }
     }
 }

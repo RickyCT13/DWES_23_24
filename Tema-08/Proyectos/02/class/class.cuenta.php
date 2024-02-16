@@ -7,8 +7,7 @@
     No respetará la propiedad de encapsulamiento.
 */
 
-class ClassCuenta
-{
+class ClassCuenta {
     public $id;
     public $num_cuenta;
     public $id_cliente;
