@@ -622,10 +622,6 @@ class Cuenta extends Controller {
 
                 if ($handle !== FALSE) {
                     while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-                        if (count($data) == 0) {
-                            echo 'vacio';
-                            exit();
-                        }
                         $num_cuenta = $data[0];
                         $id_cliente = $data[1];
                         $fecha_alta = $data[2];

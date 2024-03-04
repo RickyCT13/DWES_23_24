@@ -338,4 +338,33 @@ class ClienteModel extends Model
         }
     }
 
+    public function getAllData() {
+        try {
+            //Sentencia SQL
+            $query = "SELECT
+                *
+            FROM clientes ORDER BY id;";
+
+            //Conectamos a la base de datos
+            //$this->db es un objeto de la clase Database
+            //Este objeto usará el método connect de esta clase
+            $conexion = $this->db->connect();
+
+            //Ejecutamos con un prepare
+            $pdostmt = $conexion->prepare($query);
+
+            //Establecemos tipo fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            //Ejecutamos
+            $pdostmt->execute();
+
+            //Devolvemos el objeto pdostatement
+            return $pdostmt;
+        } catch (PDOException $ex) {
+            include_once('template/partials/errorDB.php');
+            exit();
+        }
+    }
+
 }

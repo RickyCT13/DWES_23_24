@@ -541,4 +541,73 @@ class Cliente extends Controller {
             $this->view->render('cliente/main/index');
         }
     }
+    function exportCSV() {
+        /*
+            Iniciar o continuar sesión
+        */
+        sec_session_start();
+
+        /*
+            Comprobar si el usuario está autenticado
+        */
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autenticar";
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export']))) {
+            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
+            header('location:' . URL . 'index');
+        } else {
+            /*
+                Comprobación exitosa
+            */
+
+            /*
+                Mostrar mensaje en caso de que haya uno
+                Tras esto, borrar la variable de sesión para
+                evitar que se muestre múltiples veces
+            */
+            if (isset($_SESSION['mensaje'])) {
+                $this->view->mensaje = $_SESSION['mensaje'];
+                unset($_SESSION['mensaje']);
+            }
+
+            $clientes = $this->model->getAllData()->fetchAll(PDO::FETCH_ASSOC);
+
+            /*
+                Establecemos el nombre del archivo csv a exportar
+            */
+            $fileName = 'clientes.csv';
+
+            /*
+                Enviar cabecera(s) HTTP
+                La primera línea especifica que se enviará un archivo CSV
+                En la segunda línea se especifica el nombre del archivo
+            */
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+            /*
+                Creamos / Abrimos un archivo csv para escritura.
+                Se añade el modificador 'b' para evitar incompatibilidades
+            */
+            $file = fopen('php://output', 'w');
+
+            /*
+                Iterar sobre el array de clientes, escribiendo cada registro en el CSV
+            */
+            foreach ($clientes as $cliente) {
+                /*
+                    Eliminamos el elemento en la primera posición (id)
+                    Para evitar conflictos en la base de datos
+                */
+                array_shift($cliente);
+                fputcsv($file, $cliente, ';');
+            }
+
+            /*
+                Cerramos el flujo, aplicándose los cambios
+            */
+            fclose($file);
+        }
+    }
 }
