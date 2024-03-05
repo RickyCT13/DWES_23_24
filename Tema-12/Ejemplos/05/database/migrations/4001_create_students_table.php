@@ -11,23 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alumnos', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             /*
                 Método id()
                 Determina el tipo por defecto (bigint unsigned)
                 Además, aplica la restricción Primary Key
             */
             $table->id();
-            $table->string('nombre', 35);
-            $table->string('apellidos', 45);
-            $table->date('fecha_nacimiento');
-            $table->char('telefono', 15)->nullable(false);
-            $table->string('poblacion', 20);
+            $table->string('first_name', 35);
+            $table->string('last_names', 45);
+            $table->date('birth_date');
+            $table->char('phone_number', 15)->nullable(false);
+            $table->string('city', 20);
             $table->char('dni', 9)->unique()->nullable(false);
             $table->string('email', 40);
-            $table->unsignedBigInteger('curso_id');
+            $table->unsignedBigInteger('course_id')->nullable(false);
             // Restricción clave ajena
-            $table->foreign('curso_id')->references('id')->on('cursos')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreign('course_id')->references('id')->on('courses')->restrictOnDelete()->cascadeOnUpdate();
             /*
                 Para los campos 'create_at' y 'update_at'
                 uso de auditoría
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alumnos');
+        Schema::dropIfExists('students');
     }
 };

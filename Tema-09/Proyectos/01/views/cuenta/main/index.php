@@ -16,7 +16,7 @@
 	<div class="container">
 
 		<!-- Cabecera -->
-		<?php require_once("views/cliente/partials/header.php") ?>
+		<?php require_once("views/cuenta/partials/header.php") ?>
 
 		<!-- Mensajes -->
 		<?php require_once("template/partials/notify.php") ?>
@@ -27,13 +27,13 @@
 		<!-- Estilo card de bootstrap -->
 		<div class="card">
 			<div class="card-header">
-				Tabla de Clientes
+				Tabla de Cuentas
 			</div>
 			<div class="card-header">
 				<!-- Menú -->
-				<?php require_once("views/cliente/partials/menu.php") ?>
+				<?php require_once("views/cuenta/partials/menu.php") ?>
 				<!-- Modal -->
-				<?php require_once("views/cliente/partials/modal.php") ?>
+				<?php require("views/cuenta/partials/modal.php")?>
 			</div>
 			<div class="card-body">
 
@@ -43,47 +43,49 @@
 					<thead>
 						<tr>
 							<th>Id</th>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Email</th>
-							<th>Telefono</th>
-							<th>Ciudad</th>
-							<th>DNI</th>
+							<th>Número Cuenta</th>
+							<th>Nombre Cliente</th>
+							<th>Apellidos Cliente</th>
+							<th>Fecha Alta</th>
+							<th>Fecha Últ Movimiento</th>
+							<th>Número Movimientos</th>
+							<th>Saldo</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<!-- Mostramos cuerpo de la tabla -->
 					<tbody>
-						<?php foreach ($this->clientes as $cliente) : ?>
+						<?php foreach ($this->cuenta as $cuenta) : ?>
 							<tr>
-								<!-- Mostrar datos de clientes -->
-								<td><?= $cliente->id ?></td>
-								<td><?= $cliente->nombre ?></td>
-								<td><?= $cliente->apellidos ?></td>
-								<td><?= $cliente->email ?></td>
-								<td><?= $cliente->telefono ?></td>
-								<td><?= $cliente->ciudad ?></td>
-                                <td><?= $cliente->dni ?></td>
+								<!-- Mostrar datos de cuentas -->
+								<td><?= $cuenta->id ?></td>
+								<td><?= $cuenta->num_cuenta ?></td>
+								<td><?= $cuenta->nombreCuenta ?></td>
+								<td><?= $cuenta->apellidosCuenta ?></td>
+								<td><?= $cuenta->fecha_alta ?></td>
+								<td><?= $cuenta->fecha_ul_mov ?></td>
+								<td><?= $cuenta->num_movtos ?></td>
+								<td><?= $cuenta->saldo ?></td>
 
 								<!-- botones de acción -->
 								<td>
 									<!-- botón  eliminar -->
-									<a href="<?= URL ?>cliente/delete/<?= $cliente->id ?>" title="Eliminar" onclick="return confirm('Confimar elimación del cliente')" Class="btn btn-danger
-											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['cliente']['delete'])) ?
+									<a href="<?= URL ?>cuenta/delete/<?= $cuenta->id ?>" title="Eliminar" onclick="return confirm('Confimar elimación del cuenta')" Class="btn btn-danger
+											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['delete'])) ?
 												'disabled' : null ?>">
 										<i class="bi bi-trash"></i>
 									</a>
 
 									<!-- botón  editar -->
-									<a href="<?= URL ?>cliente/edit/<?= $cliente->id ?>" title="Editar" class="btn btn-primary
-											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['cliente']['edit'])) ?
+									<a href="<?= URL ?>cuenta/edit/<?= $cuenta->id ?>" title="Editar" class="btn btn-primary
+											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['edit'])) ?
 												'disabled' : null ?>">
 										<i class="bi bi-pencil"></i>
 									</a>
 
 									<!-- botón  mostrar -->
-									<a href="<?= URL ?>cliente/show/<?= $cliente->id ?> ?>" title="Mostrar" class="btn btn-warning
-											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['cliente']['show'])) ?
+									<a href="<?= URL ?>cuenta/show/<?= $cuenta->id ?> ?>" title="Mostrar" class="btn btn-warning
+											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['show'])) ?
 												'disabled' : null ?>">
 										<i class="bi bi-card-text"></i>
 									</a>
@@ -97,7 +99,7 @@
 			</div>
 			<div class="card-footer">
 				<small class="text-muted">
-					<td colspan="9">Nº Clientes: <?= $this->clientes->rowCount() ?></td>
+					<td colspan="10">Nº Cuentas: <?= $this->cuenta->rowCount() ?></td>
 				</small>
 			</div>
 		</div>
