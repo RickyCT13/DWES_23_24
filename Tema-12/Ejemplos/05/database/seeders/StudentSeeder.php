@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Student;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -30,6 +31,7 @@ class StudentSeeder extends Seeder
             ];
         }
 
-        DB::table('students')->insert($randomRecords);
+        //DB::table('students')->insert($randomRecords);
+        $students = Student::factory()->count(100)->create();
     }
 }

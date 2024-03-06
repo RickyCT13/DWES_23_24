@@ -553,7 +553,7 @@ class Cliente extends Controller {
         if (!isset($_SESSION['id'])) {
             $_SESSION['notify'] = "Usuario sin autenticar";
             header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cliente']['export']))) {
             $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
             header('location:' . URL . 'index');
         } else {

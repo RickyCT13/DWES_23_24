@@ -553,7 +553,7 @@ class Cliente extends Controller {
         if (!isset($_SESSION['id'])) {
             $_SESSION['notify'] = "Usuario sin autenticar";
             header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cliente']['export']))) {
             $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
             header('location:' . URL . 'index');
         } else {
@@ -708,6 +708,29 @@ class Cliente extends Controller {
                 header('location:' . URL . 'cliente');
                 exit();
             }
+        }
+    }
+
+    function exportPDF() {
+        /*
+            Iniciar o continuar sesión
+        */
+        sec_session_start();
+
+        /*
+            Comprobar si el usuario está autenticado
+        */
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autenticar";
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cliente']['export']))) {
+            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
+            header('location:' . URL . 'index');
+        } else {
+            /*
+                Comprobación exitosa
+            */
+            
         }
     }
 }
