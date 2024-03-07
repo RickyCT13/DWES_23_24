@@ -10,13 +10,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL ?>cuenta/new">Nuevo</a>
                 </li>
+                <!-- Agregar opción para exportar PDF -->
+                <li class="nav-item">
+                    <a class="nav-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export'])) ? 'active' : 'disabled' ?>" href="<?= URL ?>cuenta/pdf">Exportar PDF</a>
+                </li>
                 <!-- Agregar opción para exportar CSV -->
                 <li class="nav-item">
-                    <a class="nav-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export']) || in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export'])) ? 'active' : 'disabled' ?>" href="<?= URL ?>cuenta/exportCSV">Exportar CSV</a>
+                    <a class="nav-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export'])) ? 'active' : 'disabled' ?>" href="<?= URL ?>cuenta/exportCSV">Exportar CSV</a>
                 </li>
                 <!-- Agregar opción para importar CSV -->
                 <li class="nav-item">
-                    <button type="button" class="nav-link btn btn-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['import']) || in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['import'])) ? '' : 'disabled' ?>" data-bs-toggle="modal" data-bs-target="#importarModal">Importar CSV</button>
+                    <button type="button" class="nav-link btn btn-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['import'])) ? '' : 'disabled' ?>" data-bs-toggle="modal" data-bs-target="#importarModal">Importar CSV</button>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

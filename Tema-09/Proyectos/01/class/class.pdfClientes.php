@@ -1,7 +1,5 @@
 <?php
 
-require 'libs/fpdf.php';
-
 class ClassPdfClientes extends FPDF {
     function Header() {
         /*
@@ -16,7 +14,7 @@ class ClassPdfClientes extends FPDF {
     function Footer() {
         $this->SetY(-10);
         $this->AliasNbPages();
-        $this->Cell(0, 10, iconv('UTF-8', 'ISO-8859-1', '{nb}'), 'T', 0, 'C');
+        $this->Cell(0, 10, iconv('UTF-8', 'ISO-8859-1', $this->PageNo()), 'T', 0, 'C');
     }
 
     function titulo() {
@@ -35,8 +33,8 @@ class ClassPdfClientes extends FPDF {
         $this->Cell(35, 10, iconv('UTF-8', 'ISO-8859-1', 'Nombre'), 'B', 0, 'L', true);
         $this->Cell(25, 10, iconv('UTF-8', 'ISO-8859-1', 'Teléfono'), 'B', 0, 'R', true);
         $this->Cell(25, 10, iconv('UTF-8', 'ISO-8859-1', 'Ciudad'), 'B', 0, 'L', true);
-        $this->Cell(25, 10, iconv('UTF-8', 'ISO-8859-1', 'DNI'), 'B', 0, 'L', true);
-        $this->Cell(35, 10, iconv('UTF-8', 'ISO-8859-1', 'Correo electrónico'), 'B', 1, 'L', true);
+        $this->Cell(20, 10, iconv('UTF-8', 'ISO-8859-1', 'DNI'), 'B', 0, 'L', true);
+        $this->Cell(40, 10, iconv('UTF-8', 'ISO-8859-1', 'Correo electrónico'), 'B', 1, 'L', true);
     }
 
     function contenido($clientes) {
@@ -56,6 +54,10 @@ class ClassPdfClientes extends FPDF {
             if ($this->GetY() + 9 > $this->PageBreakTrigger) {
                 $this->AddPage();
                 $this->encabezado();
+
+                $this->SetFont('Times', '', 10);
+
+                $this->SetFillColor(230, 230, 230);
             }
 
             /*
@@ -66,8 +68,8 @@ class ClassPdfClientes extends FPDF {
             $this->Cell(35, 10, iconv('UTF-8', 'ISO-8859-1', $cliente->nombre), 'B', 0, 'L', true);
             $this->Cell(25, 10, iconv('UTF-8', 'ISO-8859-1', $cliente->telefono), 'B', 0, 'R', true);
             $this->Cell(25, 10, iconv('UTF-8', 'ISO-8859-1', $cliente->ciudad), 'B', 0, 'L', true);
-            $this->Cell(25, 10, iconv('UTF-8', 'ISO-8859-1', $cliente->dni), 'B', 0, 'L', true);
-            $this->Cell(35, 10, iconv('UTF-8', 'ISO-8859-1', $cliente->email), 'B', 1, 'L', true);
+            $this->Cell(20, 10, iconv('UTF-8', 'ISO-8859-1', $cliente->dni), 'B', 0, 'L', true);
+            $this->Cell(40, 10, iconv('UTF-8', 'ISO-8859-1', $cliente->email), 'B', 1, 'L', true);
         }
     }
 }

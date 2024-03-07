@@ -22,6 +22,6 @@ class PdfArticulos extends FPDF {
     }
 
     public function titulo() {
-        $this->cell
+        
     }
 }

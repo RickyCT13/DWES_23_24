@@ -711,7 +711,7 @@ class Cliente extends Controller {
         }
     }
 
-    function exportPDF() {
+    function pdf() {
         /*
             Iniciar o continuar sesión
         */
@@ -730,6 +730,31 @@ class Cliente extends Controller {
             /*
                 Comprobación exitosa
             */
+            /*
+                Obtener los registros de la tabla clientes
+            */
+            $clientes = $this->model->getAllData();
+            /*
+                Crear objeto de la clase ClassPdfClientes
+            */
+            $pdfClientes = new ClassPdfClientes();
+
+            /*
+                Establecemos el título que aparecerá en la pestaña
+                Tras esto, llamamos al resto de métodos
+            */
+            $pdfClientes->SetTitle('Informe Clientes '. date("d/m/Y"), true);
+            $pdfClientes->AddPage();
+            $pdfClientes->titulo();
+            $pdfClientes->encabezado();
+            $pdfClientes->contenido($clientes);
+
+            /*
+                El archivo PDF se abrirá para su visualización, con la
+                opción de descargarlo. El nombre, de manera similar al título,
+                contiene la fecha actual
+            */
+            $pdfClientes->Output('I','Informe_Clientes_' . date("d/m/Y") . ".pdf", true);
             
         }
     }

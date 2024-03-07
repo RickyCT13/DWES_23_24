@@ -670,4 +670,51 @@ class Cuenta extends Controller {
             }
         }
     }
+    function pdf() {
+        /*
+            Iniciar o continuar sesión
+        */
+        sec_session_start();
+
+        /*
+            Comprobar si el usuario está autenticado
+        */
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autenticar";
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuenta']['export']))) {
+            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
+            header('location:' . URL . 'index');
+        } else {
+            /*
+                Comprobación exitosa
+            */
+            /*
+                Obtener los registros de la tabla cuentas
+            */
+            $cuentas = $this->model->getAllData();
+            /*
+                Crear objeto de la clase ClassPdfCuentas
+            */
+            $pdfCuentas = new ClassPdfCuentas();
+
+            /*
+                Establecemos el título que aparecerá en la pestaña
+                Tras esto, llamamos al resto de métodos
+            */
+            $pdfCuentas->SetTitle('Informe Cuentas ' . date("d/m/Y"), true);
+            $pdfCuentas->AddPage();
+            $pdfCuentas->titulo();
+            $pdfCuentas->encabezado();
+            $pdfCuentas->contenido($cuentas);
+
+            /*
+                El archivo PDF se abrirá para su visualización, con la
+                opción de descargarlo. El nombre, de manera similar al título,
+                contiene la fecha actual
+            */
+            $pdfCuentas->Output('I','Informe_Cuentas_' . date("d/m/Y") . ".pdf", true);
+            
+        }
+    }
 }

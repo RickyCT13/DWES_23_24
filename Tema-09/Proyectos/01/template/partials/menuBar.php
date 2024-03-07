@@ -10,8 +10,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item"><a href="<?= URL ?>login" class="nav-link active">Login</a></li>
-        <li class="nav-item"><a href="<?= URL ?>register" class="nav-link active">Register</a></li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="<?= URL ?>cuenta">Cuentas</a>
+        </li>
       </ul>
       <div class="d-flex">
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">

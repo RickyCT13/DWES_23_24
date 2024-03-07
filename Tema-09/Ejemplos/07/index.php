@@ -12,7 +12,7 @@ $pdf->SetFont('Courier', '', 10);
 /*
     Establecemos el título del documento
 */
-$pdf->SetTitle('Informe Clientes', true);
+$pdf->SetTitle('Informe Clientes '. date("d/m/Y"), true);
 
 /*
     Establecer color del fondo de la celda
