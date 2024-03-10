@@ -39,3 +39,15 @@
     $GLOBALS['cuenta']['export'] = [1, 2, 3];
     $GLOBALS['cuenta']['import'] = [1, 2];
 
+    $GLOBALS['movimiento']['main'] = [1, 2, 3];
+    $GLOBALS['movimiento']['new'] = [1, 2];
+    $GLOBALS['movimiento']['edit'] = [1, 2];
+    $GLOBALS['movimiento']['delete'] = [1];
+    $GLOBALS['movimiento']['show'] = [1, 2, 3];
+    $GLOBALS['movimiento']['filter'] = [1, 2, 3];
+    $GLOBALS['movimiento']['order'] = [1, 2, 3];
+    $GLOBALS['movimiento']['upload'] = [1, 2];
+    $GLOBALS['movimiento']['export'] = [1, 2, 3];
+    $GLOBALS['movimiento']['import'] = [1, 2];
+
+

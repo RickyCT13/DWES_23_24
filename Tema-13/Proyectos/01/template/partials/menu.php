@@ -12,13 +12,15 @@
           <a class="nav-link active" aria-current="page" href="<?= URL ?>cuenta">Cuentas</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="<?= URL ?>cliente">Clientes</a>
+          <a class="nav-link active" aria-current="page" href="<?= URL ?>cliente">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="<?= URL ?>movimiento">Movimientos</a>
         </li>
       </ul>
       <div class="d-flex">
-       
+
       </div>
     </div>
   </div>
 </nav>
-
