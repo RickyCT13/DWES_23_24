@@ -22,7 +22,7 @@
             <!-- Cuenta del Movimiento  -->
             <div class="mb-3">
                 <label for="cuenta" class="form-label">Cuenta del Movimiento</label>
-                <input type="text" class="form-control" name="cuenta" value="<?= $this->movimiento->id_cuenta ?>" disabled>
+                <input type="text" class="form-control" name="cuenta" value="<?= $this->cuenta->num_cuenta ?>" disabled>
             </div>
 
             <!-- Fecha Hora del Movimiento -->
@@ -57,7 +57,8 @@
 
             <!-- Botón Volver -->
             <div class="mb-3">
-                <a name="" id="" class="btn btn-secondary" href="<?= URL ?>movimientos" role="button">Volver</a>
+                <a name="" id="" class="btn btn-secondary" href="<?= URL ?>movimiento" role="button">Volver</a>
+                
             </div>
 
         </form>

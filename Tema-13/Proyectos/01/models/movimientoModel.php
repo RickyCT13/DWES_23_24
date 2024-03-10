@@ -29,7 +29,7 @@ class MovimientoModel extends Model {
     }
     public function read($id) {
         try {
-            $query = "SELECT * FROM movimientos WHERE id = :id ORDER BY id;";
+            $query = "SELECT * FROM movimientos WHERE id = :id LIMIT 1";
 
             $conexion = $this->db->connect();
 
@@ -41,7 +41,7 @@ class MovimientoModel extends Model {
 
             $pdostmt->execute();
 
-            return $pdostmt;
+            return $pdostmt->fetch();
         } catch (PDOException $ex) {
             include_once('template/partials/errorDB.php');
             exit();
@@ -82,8 +82,7 @@ class MovimientoModel extends Model {
 
     public function order(int $criterio) {
         try {
-            $query = "
-                SELECT 
+            $query = "SELECT 
                 mo.id,
                 cu.num_cuenta as cuenta,
                 mo.fecha_hora,
@@ -91,7 +90,7 @@ class MovimientoModel extends Model {
                 mo.tipo,
                 mo.cantidad,
                 mo.saldo
-                FROM movimientos INNER JOIN cuentas ON mo.id_cuenta = cu.id ORDER BY :criterio
+                FROM movimientos mo INNER JOIN cuentas cu ON mo.id_cuenta = cu.id ORDER BY :criterio
             ";
 
             $conexion = $this->db->connect();

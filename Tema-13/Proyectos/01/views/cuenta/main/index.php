@@ -97,6 +97,7 @@
 					</tbody>
 				</table>
 			</div>
+			
 			<div class="card-footer">
 				<small class="text-muted">
 					<td colspan="10">Nº Cuentas: <?= $this->cuenta->rowCount() ?></td>
@@ -104,6 +105,7 @@
 			</div>
 		</div>
 	</div>
+	<br><br><br><br><br>
 
 	<!-- /.container -->
 

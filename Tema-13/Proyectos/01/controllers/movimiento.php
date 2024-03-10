@@ -31,7 +31,7 @@ class Movimiento extends Controller {
                 unset($_SESSION['mensaje']);
             }
 
-            $this->view->title = "Home - Panel Control Movimiento";
+            $this->view->title = "Home - Panel Control Movimientos";
 
             $this->view->movimientos = $this->model->get();
 
@@ -196,7 +196,7 @@ class Movimiento extends Controller {
             Iniciar o continuar sesión
         */
         sec_session_start();
-        $id = $param[0];
+        
         /*
             Comprobar si el usuario está autenticado
         */
@@ -205,22 +205,45 @@ class Movimiento extends Controller {
             header("location:" . URL . "login");
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['movimiento']['show']))) {
             $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
-            header('location:' . URL . 'index');
+            header('location:' . URL . 'movimiento');
         } else {
             /*
                 Comprobación exitosa
             */
             // Obtener id del elemento
-            
+            $id = $param[0];
 
             // Cambiar titulo de la vista
             $this->view->title = "Mostrar - Gestión Movimientos";
 
             // Obtener datos del cliente
             $this->view->movimiento = $this->model->read($id);
-            $this->view->cuenta = $this->model->getCuenta($this->view->movimiento->cuenta);
+            $this->view->cuenta = $this->model->getCuenta($this->view->movimiento->id_cuenta);
             // cargar la vista 'mostrar'
             $this->view->render('movimiento/show/index');
+        }
+    }
+    function ordenar($param = []) {
+        /*
+            Iniciar o continuar sesión
+        */
+        sec_session_start();
+        
+        /*
+            Comprobar si el usuario está autenticado
+        */
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['notify'] = "Usuario sin autenticar";
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['movimiento']['show']))) {
+            $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
+            header('location:' . URL . 'movimiento');
+        } else {
+            $this->view->title = "Home - Panel Control Movimientos";
+            $criterio = $param[0];
+            $this->view->movimientos = $this->model->order($criterio);
+
+            $this->view->render("movimiento/main/index");
         }
     }
 }

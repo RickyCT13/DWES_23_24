@@ -50,4 +50,15 @@
     $GLOBALS['movimiento']['export'] = [1, 2, 3];
     $GLOBALS['movimiento']['import'] = [1, 2];
 
+    $GLOBALS['usuario']['main'] = [1, 2, 3];
+    $GLOBALS['usuario']['new'] = [1, 2];
+    $GLOBALS['usuario']['edit'] = [1, 2];
+    $GLOBALS['usuario']['delete'] = [1];
+    $GLOBALS['usuario']['show'] = [1, 2, 3];
+    $GLOBALS['usuario']['filter'] = [1, 2, 3];
+    $GLOBALS['usuario']['order'] = [1, 2, 3];
+    $GLOBALS['usuario']['upload'] = [1, 2];
+    $GLOBALS['usuario']['export'] = [1, 2, 3];
+    $GLOBALS['usuario']['import'] = [1, 2];
+
 

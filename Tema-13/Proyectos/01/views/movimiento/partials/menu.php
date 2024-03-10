@@ -27,13 +27,13 @@
                     </a>
                     <!-- Criterio de ordenación como int -->
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/order/1">Id</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/order/2">Cuenta</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/order/3">Fecha y hora</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/order/4">Concepto</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/order/5">Tipo</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/order/6">Cantidad</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/order/7">Saldo</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/ordenar/1">Id</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/ordenar/2">Cuenta</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/ordenar/3">Fecha y hora</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/ordenar/4">Concepto</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/ordenar/5">Tipo</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/ordenar/6">Cantidad</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>movimiento/ordenar/7">Saldo</a></li>
                     </ul>
                 </li>
             </ul>

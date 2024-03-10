@@ -19,6 +19,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?= URL ?>movimiento">Movimientos</a>
         </li>
+        <li class="nav-item">
+          <?php if (in_array($_SESSION['id_rol'], $GLOBALS['usuario']['main'])) : ?>
+            <a class="nav-link active" aria-current="page" href="<?= URL ?>usuario">Usuarios</a>
+          <?php endif; ?>
+        </li>
       </ul>
       <div class="d-flex">
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
