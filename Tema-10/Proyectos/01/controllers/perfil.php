@@ -140,7 +140,13 @@
 
                 # Actualizamos perfil
                 $this->model->update($user);
-
+                $nombre = "Gestión de Perfiles";
+                $destinatario = "ricardomorenocantea13@gmail.com";
+                $asunto = "Creación de perfil";
+                $mensaje = "Se ha registrado un nuevo usuario: "
+                . "\nNombre: $name"
+                . "\nEmail: $email";
+                enviarEmail($nombre, $destinatario, $asunto, $mensaje);
                 $_SESSION['name_user'] = $name;
                 $_SESSION['mensaje'] = 'Usuario modificado correctamente';
 

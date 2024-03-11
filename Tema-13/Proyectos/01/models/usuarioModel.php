@@ -1,13 +1,11 @@
 <?php
 
-class usuarioModel extends Model
-{
+class usuarioModel extends Model {
     # Método get
     # Consulta SELECT a la tabla clientes
-    public function getUsers()
-    {
+    public function getUsuarios() {
         try {
-            $query = "SELECT * from gesbank.users";
+            $query = "SELECT * from users;";
 
             $conexion = $this->db->connect();
             $pdostmt = $conexion->prepare($query);
@@ -20,8 +18,7 @@ class usuarioModel extends Model
         }
     }
 
-    public function getRoles()
-    {
+    public function getRoles() {
         try {
             $query = "SELECT * from roles";
 
@@ -38,15 +35,14 @@ class usuarioModel extends Model
 
     # Método create
     # Ejecuta INSERT sobre la tabla cuentas
-    public function create($nombre, $email, $password, $id_rol)
-    {
+    public function create($nombre, $email, $password, $id_rol) {
         try {
 
             //Encriptamos la password
             $password = password_hash($password, PASSWORD_BCRYPT);
 
             //Primero tenemos que crear el usuario
-            $query = "INSERT INTO gesbank.users VALUES (
+            $query = "INSERT INTO users VALUES (
                 null,
                 :nombre,
                 :email,
@@ -87,10 +83,9 @@ class usuarioModel extends Model
 
     # Método isEmailUnique
     # Comprueba si un email está disponible
-    public function isEmailUnique($email)
-    {
+    public function isEmailUnique($email) {
         try {
-            $query = "SELECT COUNT(*) FROM gesbank.users WHERE email = :email";
+            $query = "SELECT COUNT(*) FROM users WHERE email = :email";
             $conexion = $this->db->connect();
             $pdostmt = $conexion->prepare($query);
             $pdostmt->bindParam(":email", $email, PDO::PARAM_STR);
@@ -109,10 +104,9 @@ class usuarioModel extends Model
 
     # Método getUserByID
     # Consulta SELECT a la tabla usuarios
-    public function getUserByID($id)
-    {
+    public function getUserByID($id) {
         try {
-            $query = "SELECT * FROM gesbank.users WHERE id = :id";
+            $query = "SELECT * FROM users WHERE id = :id";
 
             $conexion = $this->db->connect();
             $pdostmt = $conexion->prepare($query);
@@ -128,13 +122,12 @@ class usuarioModel extends Model
 
     # Método getRoleOfUser
     # Consulta SELECT a la tabla roles
-    public function getRoleOfUser($id)
-    {
+    public function getRoleOfUser($id) {
         try {
             $query = "SELECT ro.id, ro.name
-                    FROM gesbank.roles ro
-                    INNER JOIN gesbank.roles_users ru ON ro.id = ru.role_id
-                    INNER JOIN gesbank.users us ON ru.user_id = us.id
+                    FROM roles ro
+                    INNER JOIN roles_users ru ON ro.id = ru.role_id
+                    INNER JOIN users us ON ru.user_id = us.id
                     WHERE us.id = :id";
 
             $conexion = $this->db->connect();
@@ -151,11 +144,10 @@ class usuarioModel extends Model
 
     # Método delete
     # Permite eliminar un usuario, ejecuta DELETE 
-    public function delete($id)
-    {
+    public function delete($id) {
         try {
             $query = " 
-                   DELETE FROM gesbank.users WHERE id=:id;
+                   DELETE FROM users WHERE id=:id;
                    ";
 
             $conexion = $this->db->connect();
@@ -171,10 +163,9 @@ class usuarioModel extends Model
 
     # Método order
     # Permite ordenar la tabla por cualquiera de las columnas de la tabla
-    public function order(int $criterio)
-    {
+    public function order(int $criterio) {
         try {
-            $query = "SELECT * from gesbank.users ORDER BY :criterio";
+            $query = "SELECT * from users ORDER BY :criterio";
 
             $conexion = $this->db->connect();
             $pdostmt = $conexion->prepare($query);
@@ -190,8 +181,7 @@ class usuarioModel extends Model
 
     # Método filter
     # Permite filtrar la tabla cuentas a partir de una expresión de búsqueda o filtrado
-    public function filter($expresion)
-    {
+    public function filter($expresion) {
         try {
 
             $query = " SELECT 
@@ -199,7 +189,7 @@ class usuarioModel extends Model
                         us.name,
                         us.email
                     FROM 
-                        gesbank.users
+                        users
                     WHERE 
                         concat_ws(  ' ',
                                     us.id,
@@ -230,14 +220,13 @@ class usuarioModel extends Model
     # Actualiza los detalles de un usuario
     # Método update
     # Actualiza los detalles de un usuario, incluido el rol
-    public function update(classUser $usuario, $id, $idRol)
-    {
+    public function update(classUser $usuario, $id, $idRol) {
         try {
             // Obtener la conexión a la base de datos
             $conexion = $this->db->connect();
 
-            // Actualizamos los detalles del usuario en la tabla gesbank.users
-            $query = "UPDATE gesbank.users SET
+            // Actualizamos los detalles del usuario en la tabla users
+            $query = "UPDATE users SET
                     name = :name,
                     email = :email,
                     password = :password,
@@ -253,7 +242,7 @@ class usuarioModel extends Model
             $pdostmt->execute();
 
             // Actualizamos el rol del usuario en la tabla roles_users
-            $query = "UPDATE gesbank.roles_users SET
+            $query = "UPDATE roles_users SET
                     role_id = :role_id,
                     update_at = NOW()
                 WHERE

@@ -13,6 +13,7 @@ require_once 'libs/model.php';
 require_once 'libs/view.php';
 require_once 'libs/controlsession.php';
 require_once 'libs/fpdf/fpdf.php';
+require_once 'libs/email.php';
 
 require_once 'libs/app.php';
 

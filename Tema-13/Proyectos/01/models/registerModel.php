@@ -32,7 +32,7 @@
                 return false;
             else 
                 return true;
-        } catch (PDOException $e) {
+        } catch (PDOException $ex) {
             
             include_once('template/partials/errorDB.php');
             exit();
@@ -83,7 +83,7 @@
             $stmt->bindParam(':role_id', $role_id);
             $stmt->execute();
 
-        }  catch (PDOException $e) {
+        }  catch (PDOException $ex) {
             
             include_once('template/partials/errorDB.php');
             exit();
