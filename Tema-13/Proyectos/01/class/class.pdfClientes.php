@@ -1,6 +1,26 @@
 <?php
 
-class ClassPdfClientes extends FPDF {
+/*
+
+    Encabezado: Ha de mostrar la siguiente información: GESBANK 1.0 alineado a la izquierda, Tu Nombre alineado en el centro y 2DAW 23/24 alineado a la derecha. 
+    Además deberá mostrar el borde inferior.
+
+    Pie de Página: mostrará el número de la página centrado y con borde superior.
+   
+    Título del Informe: Se mostrará al principio del informe, en negrita tamaño 12 y mostrará la siguiente información:
+    Informe: Listado de Cuentas/Clientes
+    Fecha: (Fecha hora actual)
+
+    Encabezado del listado: Mostrará el encabezado de cada una de las columnas del informe, para ello el alumno elegirá las columnas más adecuadas en base a la anchura del informe que será un A4.  
+    Mostrará un borde inferior y fondo sombreado. Las columnas han de estar ajustadas a los 190 mm de anchura del A4.
+    Contenido: Mostrará en una fila del informe los datos de cada tabla. En caso de llegar al final de página se generará automáticamente una nueva página. Añadir registros suficiente para comprobar 
+    que realiza correctamente los saltos de página. Hay que tener en cuenta que cuando pasa página, tiene que lanzar el encabezado del listado.
+
+*/
+
+class ClassPdfClientes extends FPDF
+{
+
     function Header() {
         /*
             Cabecera del documento PDF
