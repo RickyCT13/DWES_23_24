@@ -19,7 +19,7 @@ return new class extends Migration
                 Se usa el modificador 'after()' para que se posicione antes
                 de las timestamps (create_at y update_at).
             */
-            $table->binary('imagen')->after('precio_venta');
+            $table->binary('imagen')->after('precio_venta')->nullable(true);
         });
     }
 

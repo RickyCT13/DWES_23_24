@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Articulo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -72,5 +73,6 @@ class ArticulosSeeder extends Seeder
                 'precio_venta' => 158.85
             ]
         ]);
+        $articulos = Articulo::factory()->count(40)->create();
     }
 }

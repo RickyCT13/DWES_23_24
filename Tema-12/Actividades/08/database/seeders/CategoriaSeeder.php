@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Categoria;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -32,5 +32,6 @@ class CategoriaSeeder extends Seeder
                 'descripcion' => 'Productos para usar en el exterior'
             ]
         ]);
+        $categorias = Categoria::factory()->count(20)->create();
     }
 }
